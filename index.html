@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="hu">
 
 <head>
@@ -31,29 +30,108 @@
 
 <body>
 
+    <!-- Lehulló rózsaszirmok -->
+    <div id="petals"></div>
 
-<main class="hero">
 
-    <div class="card">
+    <!-- Nyelvválasztó -->
+    <div class="language-switcher">
 
-        <img
-            src="images/save-the-date.jpg"
-            alt="Duy és Júlia – Save the Date, 2027. május 21."
-            class="save-the-date"
+        <button
+            id="huButton"
+            class="lang-button active"
+            type="button"
         >
+            HU
+        </button>
 
-        <div class="message">
+        <span>|</span>
 
-            <p class="coming-soon">
-                A részletekkel hamarosan jelentkezünk ♡
-            </p>
-
-        </div>
+        <button
+            id="viButton"
+            class="lang-button"
+            type="button"
+        >
+            VI
+        </button>
 
     </div>
 
-</main>
 
+    <!-- Fő tartalom -->
+    <main class="hero">
+
+        <div class="card">
+
+            <img
+                id="saveTheDateImage"
+                src="images/save-the-date-hu.jpg"
+                alt="Save the Date – 2027. május 21."
+                class="save-the-date"
+            >
+
+            <div class="message">
+
+                <p
+                    id="comingSoon"
+                    class="coming-soon"
+                >
+                    A részletekkel hamarosan jelentkezünk ♡
+                </p>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <!-- Háttérzene -->
+    <audio
+        id="weddingMusic"
+        loop
+        preload="metadata"
+    >
+
+        <source
+            src="music/wedding-music.wav"
+            type="audio/mpeg"
+        >
+
+    </audio>
+
+
+    <!-- Zene + hangerő -->
+    <div
+        id="audioControls"
+        class="audio-controls"
+    >
+
+        <button
+            id="musicButton"
+            class="music-button"
+            type="button"
+            aria-label="Zene lejátszása"
+            title="Zene"
+        >
+            ♪
+        </button>
+
+        <input
+            id="volumeControl"
+            class="volume-control"
+            type="range"
+            min="0"
+            max="1"
+            step="0.05"
+            value="0.35"
+            aria-label="Hangerő"
+        >
+
+    </div>
+
+
+    <script src="script.js"></script>
 
 </body>
 
