@@ -1,0 +1,170 @@
+* {
+    margin: 0;
+    padding: 0;
+
+    box-sizing: border-box;
+}
+
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+}
+
+
+body {
+
+    background-color: #fdfcf9;
+
+    color: #111111;
+
+    font-family: "Inter", sans-serif;
+
+}
+
+
+.hero {
+
+    min-height: 100svh;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    padding: 40px 20px;
+
+}
+
+
+.card {
+
+    width: 100%;
+
+    max-width: 650px;
+
+    text-align: center;
+
+    animation: fadeIn 1.4s ease-out;
+
+}
+
+
+.save-the-date {
+
+    display: block;
+
+    width: 100%;
+
+    height: auto;
+
+    max-height: 75svh;
+
+    object-fit: contain;
+
+    margin: 0 auto;
+
+}
+
+
+.message {
+
+    margin-top: 28px;
+
+}
+
+
+.date {
+
+    font-family: "Cormorant Garamond", serif;
+
+    font-size: 24px;
+
+    letter-spacing: 1px;
+
+}
+
+
+.coming-soon {
+
+    margin-top: 10px;
+
+    font-size: 12px;
+
+    letter-spacing: 1.5px;
+
+    text-transform: uppercase;
+
+    color: #666666;
+
+}
+
+
+@keyframes fadeIn {
+
+    from {
+
+        opacity: 0;
+
+        transform: translateY(12px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform: translateY(0);
+
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .hero {
+
+        padding: 20px 15px;
+
+    }
+
+
+    .card {
+
+        max-width: 420px;
+
+    }
+
+
+    .save-the-date {
+
+        max-height: 72svh;
+
+    }
+
+
+    .message {
+
+        margin-top: 20px;
+
+    }
+
+
+    .date {
+
+        font-size: 21px;
+
+    }
+
+
+    .coming-soon {
+
+        font-size: 10px;
+
+        letter-spacing: 1.2px;
+
+    }
+
+}
