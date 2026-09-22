@@ -1,0 +1,901 @@
+/* ================================================= */
+/* ALAP                                              */
+/* ================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+}
+
+
+body {
+    min-height: 100svh;
+
+    background-color: #fdfcf9;
+
+    color: #111111;
+
+    font-family: "Inter", sans-serif;
+
+    overflow-x: hidden;
+}
+
+
+button,
+input {
+    font: inherit;
+}
+
+
+[hidden] {
+    display: none !important;
+}
+
+
+
+/* ================================================= */
+/* NYELVVÁLTÓ                                        */
+/* ================================================= */
+
+.language-switcher {
+    position: fixed;
+
+    top: 22px;
+    right: 22px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+
+    z-index: 10000;
+
+    font-size: 11px;
+
+    letter-spacing: 1.3px;
+
+    color: #bbbbbb;
+}
+
+
+.lang-button {
+    border: none;
+
+    background: transparent;
+
+    color: #999999;
+
+    font-family: "Inter", sans-serif;
+
+    font-size: inherit;
+
+    letter-spacing: inherit;
+
+    cursor: pointer;
+
+    padding: 5px 2px;
+
+    transition:
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.lang-button:hover {
+    color: #6f1d2e;
+
+    transform: translateY(-1px);
+}
+
+
+.lang-button.active {
+    color: #6f1d2e;
+}
+
+
+
+/* ================================================= */
+/* LOGIN                                             */
+/* ================================================= */
+
+.login-screen {
+    min-height: 100svh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 24px;
+}
+
+
+.login-box {
+    width: 100%;
+    max-width: 390px;
+
+    padding: 46px 34px;
+
+    text-align: center;
+
+    background: rgba(
+        255,
+        255,
+        255,
+        0.68
+    );
+
+    border: 1px solid rgba(
+        111,
+        29,
+        46,
+        0.10
+    );
+
+    border-radius: 28px;
+
+    box-shadow:
+        0 18px 60px
+        rgba(
+            40,
+            20,
+            20,
+            0.06
+        );
+
+    backdrop-filter: blur(8px);
+
+    animation:
+        fadeIn 0.9s ease-out;
+}
+
+
+.heart {
+    margin-bottom: 16px;
+
+    color: #6f1d2e;
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size: 34px;
+
+    line-height: 1;
+}
+
+
+.login-box h1 {
+    margin-bottom: 12px;
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-weight: 400;
+
+    font-size: 38px;
+
+    line-height: 1.1;
+}
+
+
+.login-description {
+    max-width: 290px;
+
+    margin:
+        0 auto
+        30px;
+
+    color: #777777;
+
+    font-size: 10px;
+
+    line-height: 1.8;
+
+    letter-spacing: 1.2px;
+
+    text-transform: uppercase;
+}
+
+
+.password-wrapper {
+    margin-bottom: 14px;
+}
+
+
+.password-input {
+    width: 100%;
+
+    padding:
+        15px
+        18px;
+
+    border: 1px solid rgba(
+        111,
+        29,
+        46,
+        0.22
+    );
+
+    border-radius: 999px;
+
+    outline: none;
+
+    background: rgba(
+        255,
+        255,
+        255,
+        0.82
+    );
+
+    color: #111111;
+
+    font-size: 14px;
+
+    text-align: center;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+
+
+.password-input::placeholder {
+    color: #aaaaaa;
+}
+
+
+.password-input:focus {
+    border-color: #6f1d2e;
+
+    background: #ffffff;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(
+            111,
+            29,
+            46,
+            0.06
+        );
+}
+
+
+.login-button {
+    width: 100%;
+
+    padding:
+        14px
+        20px;
+
+    border: none;
+
+    border-radius: 999px;
+
+    background: #6f1d2e;
+
+    color: #ffffff;
+
+    font-size: 10px;
+
+    letter-spacing: 2px;
+
+    text-transform: uppercase;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        background-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.login-button:hover {
+    transform: translateY(-1px);
+
+    background: #5f1828;
+
+    box-shadow:
+        0 8px 24px
+        rgba(
+            111,
+            29,
+            46,
+            0.18
+        );
+}
+
+
+.login-error {
+    margin-top: 18px;
+
+    color: #6f1d2e;
+
+    font-size: 11px;
+}
+
+
+
+/* ================================================= */
+/* FŐOLDAL                                           */
+/* ================================================= */
+
+.wedding-site {
+    min-height: 100svh;
+}
+
+
+.hero {
+    min-height: 100svh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 40px 20px;
+}
+
+
+.card {
+    width: 100%;
+
+    max-width: 650px;
+
+    text-align: center;
+
+    animation:
+        fadeIn 1.4s ease-out;
+}
+
+
+.save-the-date {
+    display: block;
+
+    width: 100%;
+    height: auto;
+
+    max-height: 75svh;
+
+    object-fit: contain;
+
+    margin: 0 auto;
+}
+
+
+.message {
+    margin-top: 28px;
+}
+
+
+.coming-soon {
+    color: #666666;
+
+    font-size: 12px;
+
+    letter-spacing: 1.5px;
+
+    text-transform: uppercase;
+}
+
+
+
+/* ================================================= */
+/* ANIMÁCIÓ                                          */
+/* ================================================= */
+
+@keyframes fadeIn {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
+
+}
+
+
+
+/* ================================================= */
+/* AUDIO                                             */
+/* ================================================= */
+
+.audio-controls {
+    position: fixed;
+
+    right: 22px;
+    bottom: 22px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    z-index: 1000;
+}
+
+
+.music-button {
+    position: relative;
+
+    flex-shrink: 0;
+
+    width: 46px;
+    height: 46px;
+
+    border:
+        1px solid
+        rgba(
+            111,
+            29,
+            46,
+            0.28
+        );
+
+    border-radius: 50%;
+
+    background:
+        rgba(
+            253,
+            252,
+            249,
+            0.92
+        );
+
+    color: #6f1d2e;
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size: 22px;
+
+    cursor: pointer;
+
+    backdrop-filter: blur(8px);
+
+    box-shadow:
+        0 4px 18px
+        rgba(
+            0,
+            0,
+            0,
+            0.06
+        );
+
+    transition:
+        transform 0.25s ease,
+        background-color 0.25s ease,
+        color 0.25s ease;
+}
+
+
+.music-button:hover {
+    transform: scale(1.08);
+}
+
+
+.music-button.playing {
+    background-color: #6f1d2e;
+
+    color: #ffffff;
+}
+
+
+.volume-control {
+    width: 0;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    accent-color: #6f1d2e;
+
+    cursor: pointer;
+
+    transition:
+        width 0.3s ease,
+        opacity 0.3s ease;
+}
+
+
+.audio-controls:hover
+.volume-control {
+    width: 90px;
+
+    opacity: 1;
+
+    pointer-events: auto;
+}
+
+
+.audio-controls.active
+.volume-control {
+    width: 90px;
+
+    opacity: 1;
+
+    pointer-events: auto;
+}
+
+
+
+/* ================================================= */
+/* KILÉPÉS                                           */
+/* ================================================= */
+
+.logout-button {
+    position: fixed;
+
+    left: 22px;
+    bottom: 22px;
+
+    z-index: 1000;
+
+    border: none;
+
+    background: transparent;
+
+    color: #aaaaaa;
+
+    font-size: 9px;
+
+    letter-spacing: 1.3px;
+
+    text-transform: uppercase;
+
+    cursor: pointer;
+
+    transition:
+        color 0.2s ease;
+}
+
+
+.logout-button:hover {
+    color: #6f1d2e;
+}
+
+
+
+/* ================================================= */
+/* RÓZSASZIRMOK                                      */
+/* ================================================= */
+
+#petals {
+    position: fixed;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    pointer-events: none;
+
+    overflow: hidden;
+
+    z-index: 20;
+}
+
+
+.petal {
+    position: absolute;
+
+    top: -30px;
+
+    width: 11px;
+    height: 16px;
+
+    background-color: #6f1d2e;
+
+    border-radius:
+        80% 20%
+        70% 30%;
+
+    opacity: 0;
+
+    filter: blur(0.1px);
+
+    animation:
+        fall linear forwards;
+}
+
+
+@keyframes fall {
+
+    0% {
+        transform:
+            translate3d(
+                0,
+                -5vh,
+                0
+            )
+            rotate(0deg);
+
+        opacity: 0;
+    }
+
+
+    10% {
+        opacity: 0.65;
+    }
+
+
+    25% {
+        transform:
+            translate3d(
+                18px,
+                25vh,
+                0
+            )
+            rotate(90deg);
+    }
+
+
+    50% {
+        transform:
+            translate3d(
+                -12px,
+                50vh,
+                0
+            )
+            rotate(180deg);
+    }
+
+
+    75% {
+        transform:
+            translate3d(
+                22px,
+                75vh,
+                0
+            )
+            rotate(270deg);
+    }
+
+
+    100% {
+        transform:
+            translate3d(
+                -15px,
+                105vh,
+                0
+            )
+            rotate(360deg);
+
+        opacity: 0;
+    }
+
+}
+
+
+
+/* ================================================= */
+/* CSILLÁM                                           */
+/* ================================================= */
+
+.sparkle {
+    position: fixed;
+
+    width: 6px;
+    height: 6px;
+
+    pointer-events: none;
+
+    z-index: 9999;
+
+    border-radius: 50%;
+
+    transform:
+        translate(
+            -50%,
+            -50%
+        );
+
+    animation:
+        sparkleFade
+        700ms
+        ease-out
+        forwards;
+}
+
+
+.sparkle.star {
+    border-radius: 0;
+
+    clip-path:
+        polygon(
+            50% 0%,
+            61% 38%,
+            100% 50%,
+            61% 62%,
+            50% 100%,
+            39% 62%,
+            0% 50%,
+            39% 38%
+        );
+}
+
+
+@keyframes sparkleFade {
+
+    0% {
+        opacity: 1;
+
+        transform:
+            translate(
+                -50%,
+                -50%
+            )
+            scale(1)
+            rotate(0deg);
+    }
+
+
+    100% {
+        opacity: 0;
+
+        transform:
+            translate(
+                calc(
+                    -50%
+                    +
+                    var(--move-x)
+                ),
+                calc(
+                    -50%
+                    +
+                    var(--move-y)
+                )
+            )
+            scale(0)
+            rotate(120deg);
+    }
+
+}
+
+
+
+/* ================================================= */
+/* MOBIL                                             */
+/* ================================================= */
+
+@media (max-width: 600px) {
+
+    .language-switcher {
+        top: 14px;
+        right: 16px;
+
+        font-size: 10px;
+    }
+
+
+    .login-screen {
+        padding:
+            20px
+            16px;
+    }
+
+
+    .login-box {
+        max-width: 360px;
+
+        padding:
+            40px
+            24px;
+
+        border-radius: 24px;
+    }
+
+
+    .login-box h1 {
+        font-size: 34px;
+    }
+
+
+    .login-description {
+        font-size: 9px;
+
+        letter-spacing: 1px;
+    }
+
+
+    .hero {
+        padding:
+            20px
+            15px;
+    }
+
+
+    .card {
+        max-width: 420px;
+    }
+
+
+    .save-the-date {
+        max-height: 72svh;
+    }
+
+
+    .message {
+        margin-top: 20px;
+    }
+
+
+    .coming-soon {
+        font-size: 10px;
+
+        letter-spacing: 1.2px;
+    }
+
+
+    .audio-controls {
+        right: 16px;
+        bottom: 16px;
+    }
+
+
+    .music-button {
+        width: 42px;
+        height: 42px;
+
+        font-size: 20px;
+    }
+
+
+    .audio-controls.active
+    .volume-control {
+        width: 80px;
+    }
+
+
+    .logout-button {
+        left: 16px;
+        bottom: 19px;
+    }
+
+}
+
+
+
+/* ================================================= */
+/* MOZGÁSCSÖKKENTÉS                                  */
+/* ================================================= */
+
+@media (
+    prefers-reduced-motion: reduce
+) {
+
+    .login-box,
+    .card {
+        animation: none;
+    }
+
+
+    .petal {
+        display: none;
+    }
+
+
+    * {
+        scroll-behavior:
+            auto !important;
+    }
+
+}
