@@ -9,15 +9,22 @@
 }
 
 
-html,
-body {
+html {
     width: 100%;
     min-height: 100%;
+
+    overflow-x: hidden;
+
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
 }
 
 
 body {
+    width: 100%;
     min-height: 100svh;
+
+    margin: 0;
 
     background-color: #fdfcf9;
 
@@ -26,6 +33,9 @@ body {
     font-family: "Inter", sans-serif;
 
     overflow-x: hidden;
+
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
 }
 
 
@@ -48,8 +58,25 @@ input {
 .language-switcher {
     position: fixed;
 
-    top: 22px;
-    right: 22px;
+    top:
+        calc(
+            22px
+            +
+            env(
+                safe-area-inset-top,
+                0px
+            )
+        );
+
+    right:
+        calc(
+            22px
+            +
+            env(
+                safe-area-inset-right,
+                0px
+            )
+        );
 
     display: flex;
     align-items: center;
@@ -63,6 +90,8 @@ input {
     letter-spacing: 1.3px;
 
     color: #bbbbbb;
+
+    white-space: nowrap;
 }
 
 
@@ -90,7 +119,8 @@ input {
 .lang-button:hover {
     color: #6f1d2e;
 
-    transform: translateY(-1px);
+    transform:
+        translateY(-1px);
 }
 
 
@@ -105,18 +135,40 @@ input {
 /* ================================================= */
 
 .login-screen {
+    width: 100%;
+
     min-height: 100svh;
 
     display: flex;
+
     justify-content: center;
+
     align-items: center;
 
-    padding: 24px;
+    padding:
+        calc(
+            24px
+            +
+            env(
+                safe-area-inset-top,
+                0px
+            )
+        )
+        24px
+        calc(
+            24px
+            +
+            env(
+                safe-area-inset-bottom,
+                0px
+            )
+        );
 }
 
 
 .login-box {
     width: 100%;
+
     max-width: 390px;
 
     padding:
@@ -155,7 +207,8 @@ input {
             0.06
         );
 
-    backdrop-filter: blur(8px);
+    backdrop-filter:
+        blur(8px);
 
     animation:
         fadeIn
@@ -245,7 +298,7 @@ input {
 
     color: #111111;
 
-    font-size: 14px;
+    font-size: 16px;
 
     text-align: center;
 }
@@ -416,6 +469,8 @@ input {
 
     width: 100%;
 
+    min-width: 0;
+
     min-height: 100svh;
 
     display: flex;
@@ -440,6 +495,8 @@ input {
 
     width: 100%;
 
+    min-width: 0;
+
     max-width: 720px;
 
     margin: 0 auto;
@@ -450,7 +507,7 @@ input {
 
 
 /* ================================================= */
-/* SAJÁT SZIRMOK MINDEN DIÁN                        */
+/* SZIRMOK                                           */
 /* ================================================= */
 
 .slide-petals {
@@ -645,7 +702,7 @@ input {
 
 
 /* ================================================= */
-/* HELYSZÍN DIA                                      */
+/* HELYSZÍN                                          */
 /* ================================================= */
 
 .venue-slide {
@@ -690,7 +747,7 @@ input {
 
 
 /* ================================================= */
-/* NAGY SZÍV TÉRKÉP                                  */
+/* SZÍV TÉRKÉP                                       */
 /* ================================================= */
 
 .heart-map-wrapper {
@@ -701,6 +758,8 @@ input {
     justify-content: center;
 
     align-items: center;
+
+    background-color: #fdfcf9;
 }
 
 
@@ -718,7 +777,7 @@ input {
 
     overflow: hidden;
 
-    background: #d8d8d8;
+    background-color: #fdfcf9;
 
 
     -webkit-mask-image:
@@ -770,10 +829,7 @@ input {
 
     display: block;
 
-    filter:
-        saturate(1.07)
-        contrast(1.03)
-        brightness(0.97);
+    background-color: #fdfcf9;
 }
 
 
@@ -859,23 +915,10 @@ input {
     transform:
         translateY(-50%);
 
-    backdrop-filter: blur(8px);
+    backdrop-filter:
+        blur(8px);
 
     opacity: 0.62;
-
-    transition:
-        opacity 0.25s ease,
-        background-color 0.25s ease,
-        color 0.25s ease;
-}
-
-
-.slide-arrow:hover {
-    opacity: 1;
-
-    background: #6f1d2e;
-
-    color: #ffffff;
 }
 
 
@@ -906,7 +949,15 @@ input {
 
     left: 50%;
 
-    bottom: 46px;
+    bottom:
+        calc(
+            46px
+            +
+            env(
+                safe-area-inset-bottom,
+                0px
+            )
+        );
 
     z-index: 200;
 
@@ -970,7 +1021,15 @@ input {
 
     left: 50%;
 
-    bottom: 20px;
+    bottom:
+        calc(
+            20px
+            +
+            env(
+                safe-area-inset-bottom,
+                0px
+            )
+        );
 
     z-index: 190;
 
@@ -1007,9 +1066,25 @@ input {
 .audio-controls {
     position: fixed;
 
-    right: 22px;
+    right:
+        calc(
+            22px
+            +
+            env(
+                safe-area-inset-right,
+                0px
+            )
+        );
 
-    bottom: 22px;
+    bottom:
+        calc(
+            22px
+            +
+            env(
+                safe-area-inset-bottom,
+                0px
+            )
+        );
 
     display: flex;
 
@@ -1100,9 +1175,25 @@ input {
 .logout-button {
     position: fixed;
 
-    left: 22px;
+    left:
+        calc(
+            22px
+            +
+            env(
+                safe-area-inset-left,
+                0px
+            )
+        );
 
-    bottom: 22px;
+    bottom:
+        calc(
+            22px
+            +
+            env(
+                safe-area-inset-bottom,
+                0px
+            )
+        );
 
     z-index: 1000;
 
@@ -1110,7 +1201,7 @@ input {
 
     background: transparent;
 
-    color: #aaaaaa;
+    color: #999999;
 
     font-size: 9px;
 
@@ -1119,6 +1210,8 @@ input {
     text-transform: uppercase;
 
     cursor: pointer;
+
+    white-space: nowrap;
 }
 
 
@@ -1236,25 +1329,73 @@ input {
     max-width: 700px
 ) {
 
-    .language-switcher {
-        top: 14px;
+    body {
+        min-height: 100dvh;
+    }
 
-        right: 16px;
+
+    .language-switcher {
+        top:
+            calc(
+                12px
+                +
+                env(
+                    safe-area-inset-top,
+                    0px
+                )
+            );
+
+        right:
+            calc(
+                14px
+                +
+                env(
+                    safe-area-inset-right,
+                    0px
+                )
+            );
 
         font-size: 10px;
     }
 
 
+    /*
+    FONTOS IOS JAVÍTÁS:
+    minimum 16px -> Safari nem zoomol bele
+    */
+
+    .password-input {
+        font-size: 16px;
+    }
+
+
     .login-screen {
+        min-height: 100dvh;
+
         padding:
-            20px
-            16px;
+            calc(
+                60px
+                +
+                env(
+                    safe-area-inset-top,
+                    0px
+                )
+            )
+            16px
+            calc(
+                30px
+                +
+                env(
+                    safe-area-inset-bottom,
+                    0px
+                )
+            );
     }
 
 
     .login-box {
         padding:
-            40px
+            38px
             24px;
     }
 
@@ -1264,21 +1405,46 @@ input {
     }
 
 
+    .wedding-site,
+    .slider-shell,
+    .wedding-slide {
+        min-height: 100dvh;
+    }
+
+
     .wedding-slide {
         padding:
-            50px
+            calc(
+                58px
+                +
+                env(
+                    safe-area-inset-top,
+                    0px
+                )
+            )
             5px
-            95px;
+            calc(
+                100px
+                +
+                env(
+                    safe-area-inset-bottom,
+                    0px
+                )
+            );
     }
 
 
     .slide-inner {
+        width: 100%;
+
         max-width: 490px;
     }
 
 
     .save-the-date {
-        max-height: 69svh;
+        max-width: 100%;
+
+        max-height: 67dvh;
     }
 
 
@@ -1302,7 +1468,7 @@ input {
 
 
     .heart-map-frame {
-        width: 99%;
+        width: 98%;
     }
 
 
@@ -1325,11 +1491,11 @@ input {
 
 
     .slide-arrow {
-        width: 36px;
+        width: 34px;
 
-        height: 36px;
+        height: 34px;
 
-        font-size: 27px;
+        font-size: 26px;
 
         opacity: 0.25;
 
@@ -1338,42 +1504,90 @@ input {
                 253,
                 252,
                 249,
-                0.55
+                0.60
             );
     }
 
 
     .slide-arrow-left {
-        left: 5px;
+        left:
+            calc(
+                4px
+                +
+                env(
+                    safe-area-inset-left,
+                    0px
+                )
+            );
     }
 
 
     .slide-arrow-right {
-        right: 5px;
+        right:
+            calc(
+                4px
+                +
+                env(
+                    safe-area-inset-right,
+                    0px
+                )
+            );
     }
 
 
     .slide-dots {
-        bottom: 43px;
+        bottom:
+            calc(
+                47px
+                +
+                env(
+                    safe-area-inset-bottom,
+                    0px
+                )
+            );
     }
 
 
     .swipe-hint {
-        bottom: 20px;
+        bottom:
+            calc(
+                23px
+                +
+                env(
+                    safe-area-inset-bottom,
+                    0px
+                )
+            );
     }
 
 
     .audio-controls {
-        right: 16px;
+        right:
+            calc(
+                14px
+                +
+                env(
+                    safe-area-inset-right,
+                    0px
+                )
+            );
 
-        bottom: 16px;
+        bottom:
+            calc(
+                14px
+                +
+                env(
+                    safe-area-inset-bottom,
+                    0px
+                )
+            );
     }
 
 
     .music-button {
-        width: 42px;
+        width: 40px;
 
-        height: 42px;
+        height: 40px;
 
         font-size: 20px;
     }
@@ -1381,14 +1595,32 @@ input {
 
     .audio-controls.active
     .volume-control {
-        width: 80px;
+        width: 70px;
     }
 
 
     .logout-button {
-        left: 16px;
+        left:
+            calc(
+                14px
+                +
+                env(
+                    safe-area-inset-left,
+                    0px
+                )
+            );
 
-        bottom: 19px;
+        bottom:
+            calc(
+                18px
+                +
+                env(
+                    safe-area-inset-bottom,
+                    0px
+                )
+            );
+
+        font-size: 9px;
     }
 
 }
