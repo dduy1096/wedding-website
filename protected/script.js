@@ -1,6 +1,6 @@
-/* --------------------------------- */
-/* ZENE                              */
-/* --------------------------------- */
+/* ================================================= */
+/* ZENE                                              */
+/* ================================================= */
 
 const music =
     document.getElementById("weddingMusic");
@@ -15,55 +15,92 @@ const audioControls =
     document.getElementById("audioControls");
 
 
-let isPlaying = false;
 
-
-
-/* --------------------------------- */
-/* HANGERŐ BETÖLTÉSE                 */
-/* --------------------------------- */
+/* ================================================= */
+/* HANGERŐ BETÖLTÉSE                                 */
+/* ================================================= */
 
 const savedVolume =
-    localStorage.getItem("weddingVolume");
+    localStorage.getItem(
+        "weddingVolume"
+    );
 
 
 if (savedVolume !== null) {
 
-    music.volume =
+    const parsedVolume =
         Number(savedVolume);
 
-    volumeControl.value =
-        savedVolume;
+
+    if (
+        Number.isFinite(parsedVolume)
+        &&
+        parsedVolume >= 0
+        &&
+        parsedVolume <= 1
+    ) {
+
+        music.volume =
+            parsedVolume;
+
+        volumeControl.value =
+            String(parsedVolume);
+
+    } else {
+
+        music.volume = 0.35;
+
+        volumeControl.value =
+            "0.35";
+
+    }
 
 } else {
 
     music.volume = 0.35;
 
-    volumeControl.value = 0.35;
+    volumeControl.value =
+        "0.35";
+
 }
 
 
 
-/* --------------------------------- */
-/* AUDIO UI FRISSÍTÉSE               */
-/* --------------------------------- */
+/* ================================================= */
+/* AUDIO UI                                          */
+/* ================================================= */
 
 function updateAudioUI() {
 
     const currentLanguage =
-        localStorage.getItem("weddingLanguage") || "hu";
+        localStorage.getItem(
+            "weddingLanguage"
+        ) || "hu";
+
+
+    const isPlaying =
+        !music.paused
+        &&
+        !music.ended;
 
 
     if (isPlaying) {
 
-        musicButton.classList.add("playing");
+        musicButton.classList.add(
+            "playing"
+        );
 
-        audioControls.classList.add("active");
+        audioControls.classList.add(
+            "active"
+        );
 
-        musicButton.textContent = "♫";
+        musicButton.textContent =
+            "♫";
 
 
-        if (currentLanguage === "vi") {
+        if (
+            currentLanguage === "vi"
+        ) {
 
             musicButton.setAttribute(
                 "aria-label",
@@ -81,14 +118,21 @@ function updateAudioUI() {
 
     } else {
 
-        musicButton.classList.remove("playing");
+        musicButton.classList.remove(
+            "playing"
+        );
 
-        audioControls.classList.remove("active");
+        audioControls.classList.remove(
+            "active"
+        );
 
-        musicButton.textContent = "♪";
+        musicButton.textContent =
+            "♪";
 
 
-        if (currentLanguage === "vi") {
+        if (
+            currentLanguage === "vi"
+        ) {
 
             musicButton.setAttribute(
                 "aria-label",
@@ -105,21 +149,20 @@ function updateAudioUI() {
         }
 
     }
+
 }
 
 
 
-/* --------------------------------- */
-/* ZENE INDÍTÁSA                     */
-/* --------------------------------- */
+/* ================================================= */
+/* ZENE INDÍTÁSA                                     */
+/* ================================================= */
 
 async function startMusic() {
 
     try {
 
         await music.play();
-
-        isPlaying = true;
 
         updateAudioUI();
 
@@ -129,32 +172,35 @@ async function startMusic() {
             "A zene nem indítható:",
             error
         );
+
     }
+
 }
 
 
 
-/* --------------------------------- */
-/* ZENE LEÁLLÍTÁSA                   */
-/* --------------------------------- */
+/* ================================================= */
+/* ZENE LEÁLLÍTÁSA                                   */
+/* ================================================= */
 
 function stopMusic() {
 
     if (!music.paused) {
 
         music.pause();
+
     }
 
-    isPlaying = false;
 
     updateAudioUI();
+
 }
 
 
 
-/* --------------------------------- */
-/* PLAY / PAUSE GOMB                 */
-/* --------------------------------- */
+/* ================================================= */
+/* PLAY / PAUSE GOMB                                 */
+/* ================================================= */
 
 musicButton.addEventListener(
     "click",
@@ -175,25 +221,44 @@ musicButton.addEventListener(
 
 
 
-/* --------------------------------- */
-/* HANGERŐ                           */
-/* --------------------------------- */
+/* ================================================= */
+/* HANGERŐ                                           */
+/* ================================================= */
 
 volumeControl.addEventListener(
     "input",
     () => {
 
         const volume =
-            Number(volumeControl.value);
+            Number(
+                volumeControl.value
+            );
+
+
+        if (
+            !Number.isFinite(volume)
+        ) {
+
+            return;
+
+        }
 
 
         music.volume =
-            volume;
+            Math.min(
+                1,
+                Math.max(
+                    0,
+                    volume
+                )
+            );
 
 
         localStorage.setItem(
             "weddingVolume",
-            String(volume)
+            String(
+                music.volume
+            )
         );
 
     }
@@ -201,9 +266,44 @@ volumeControl.addEventListener(
 
 
 
-/* --------------------------------- */
-/* APP / FÜL VÁLTÁSKOR STOP          */
-/* --------------------------------- */
+/* ================================================= */
+/* AUDIO ÁLLAPOT ESEMÉNYEK                           */
+/* ================================================= */
+
+music.addEventListener(
+    "play",
+    () => {
+
+        updateAudioUI();
+
+    }
+);
+
+
+music.addEventListener(
+    "pause",
+    () => {
+
+        updateAudioUI();
+
+    }
+);
+
+
+music.addEventListener(
+    "ended",
+    () => {
+
+        updateAudioUI();
+
+    }
+);
+
+
+
+/* ================================================= */
+/* APP / BÖNGÉSZŐFÜL VÁLTÁSKOR ZENE STOP             */
+/* ================================================= */
 
 document.addEventListener(
     "visibilitychange",
@@ -212,6 +312,7 @@ document.addEventListener(
         if (document.hidden) {
 
             stopMusic();
+
         }
 
     }
@@ -229,39 +330,35 @@ window.addEventListener(
 
 
 
-/* --------------------------------- */
-/* HA BÁRMIÉRT LEÁLL A ZENE          */
-/* --------------------------------- */
-
-music.addEventListener(
-    "pause",
-    () => {
-
-        isPlaying = false;
-
-        updateAudioUI();
-
-    }
-);
-
-/* --------------------------------- */
-/* NYELVVÁLTÁS                       */
-/* --------------------------------- */
+/* ================================================= */
+/* NYELVVÁLTÁS                                       */
+/* ================================================= */
 
 const saveTheDateImage =
-    document.getElementById("saveTheDateImage");
+    document.getElementById(
+        "saveTheDateImage"
+    );
 
 const huButton =
-    document.getElementById("huButton");
+    document.getElementById(
+        "huButton"
+    );
 
 const viButton =
-    document.getElementById("viButton");
+    document.getElementById(
+        "viButton"
+    );
 
 const comingSoon =
-    document.getElementById("comingSoon");
+    document.getElementById(
+        "comingSoon"
+    );
 
 
-function setLanguage(language) {
+
+function setLanguage(
+    language
+) {
 
     if (language === "vi") {
 
@@ -277,17 +374,26 @@ function setLanguage(language) {
             "Thông tin chi tiết sẽ sớm được cập nhật ♡";
 
 
-        viButton.classList.add("active");
+        viButton.classList.add(
+            "active"
+        );
 
-        huButton.classList.remove("active");
+
+        huButton.classList.remove(
+            "active"
+        );
 
 
         document.documentElement.lang =
             "vi";
 
 
-    } else {
+        volumeControl.setAttribute(
+            "aria-label",
+            "Âm lượng"
+        );
 
+    } else {
 
         saveTheDateImage.src =
             "asset.php?file=images/save-the-date-hu.jpg";
@@ -301,103 +407,185 @@ function setLanguage(language) {
             "A részletekkel hamarosan jelentkezünk ♡";
 
 
-        huButton.classList.add("active");
+        huButton.classList.add(
+            "active"
+        );
 
-        viButton.classList.remove("active");
+
+        viButton.classList.remove(
+            "active"
+        );
 
 
         document.documentElement.lang =
             "hu";
 
+
+        volumeControl.setAttribute(
+            "aria-label",
+            "Hangerő"
+        );
+
     }
+
 
     localStorage.setItem(
         "weddingLanguage",
         language
     );
 
+
     updateAudioUI();
+
 }
 
 
-/* HU */
 
-huButton.addEventListener("click", () => {
+/* ================================================= */
+/* NYELV GOMBOK                                      */
+/* ================================================= */
 
-    setLanguage("hu");
+huButton.addEventListener(
+    "click",
+    () => {
 
-});
+        setLanguage(
+            "hu"
+        );
 
-
-
-/* VI */
-
-viButton.addEventListener("click", () => {
-
-    setLanguage("vi");
-
-});
+    }
+);
 
 
+viButton.addEventListener(
+    "click",
+    () => {
 
-/* Korábbi nyelv betöltése */
+        setLanguage(
+            "vi"
+        );
 
-const savedLanguage =
-    localStorage.getItem("weddingLanguage");
-
-
-setLanguage(
-    savedLanguage === "vi"
-        ? "vi"
-        : "hu"
+    }
 );
 
 
 
-/* --------------------------------- */
-/* RÓZSASZIRMOK                      */
-/* --------------------------------- */
+/* ================================================= */
+/* MENTETT NYELV BETÖLTÉSE                           */
+/* ================================================= */
+
+const savedLanguage =
+    localStorage.getItem(
+        "weddingLanguage"
+    );
+
+
+setLanguage(
+
+    savedLanguage === "vi"
+        ? "vi"
+        : "hu"
+
+);
+
+
+
+/* ================================================= */
+/* MOZGÁS CSÖKKENTÉSE                                */
+/* ================================================= */
+
+const reducedMotion =
+    window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+    );
+
+
+
+/* ================================================= */
+/* RÓZSASZIRMOK                                      */
+/* ================================================= */
 
 const petalContainer =
-    document.getElementById("petals");
+    document.getElementById(
+        "petals"
+    );
+
+
+const burgundyColors = [
+
+    "#6f1d2e",
+
+    "#7a2638",
+
+    "#5f1828",
+
+    "#812a40",
+
+    "#751f35"
+
+];
 
 
 
 function createPetal() {
 
+    if (
+        reducedMotion.matches
+    ) {
+
+        return;
+
+    }
+
+
     const petal =
-        document.createElement("span");
+        document.createElement(
+            "span"
+        );
 
 
-    petal.classList.add("petal");
+    petal.classList.add(
+        "petal"
+    );
 
 
 
-    /* Véletlenszerű méret */
+    /*
+    Véletlenszerű méret
+    */
 
     const size =
-        7 + Math.random() * 7;
+        7
+        +
+        Math.random() * 7;
 
 
     petal.style.width =
         `${size}px`;
+
 
     petal.style.height =
         `${size * 1.45}px`;
 
 
 
-    /* Véletlenszerű vízszintes pozíció */
+    /*
+    Véletlenszerű indulási pont
+    */
 
     petal.style.left =
         `${Math.random() * 100}%`;
 
 
 
-    /* Véletlenszerű esési sebesség */
+    /*
+    Véletlenszerű esési idő
+    */
 
     const duration =
-        8 + Math.random() * 6;
+        8
+        +
+        Math.random() * 6;
 
 
     petal.style.animationDuration =
@@ -405,287 +593,292 @@ function createPetal() {
 
 
 
-    /* Burgundy árnyalatok */
-
-    const burgundyColors = [
-
-        "#6f1d2e",
-
-        "#7a2638",
-
-        "#5f1828",
-
-        "#812a40",
-
-        "#751f35"
-
-    ];
-
+    /*
+    Véletlenszerű burgundy árnyalat
+    */
 
     petal.style.backgroundColor =
         burgundyColors[
+
             Math.floor(
-                Math.random() *
+
+                Math.random()
+                *
                 burgundyColors.length
+
             )
+
         ];
 
 
 
-    /* Véletlenszerű átlátszóság */
+    /*
+    Véletlenszerű áttetszőség
+    */
 
     petal.style.opacity =
-        0.35 + Math.random() * 0.35;
+        String(
+            0.35
+            +
+            Math.random()
+            *
+            0.35
+        );
 
 
 
-    /* Hozzáadás */
+    petalContainer.appendChild(
+        petal
+    );
 
-    petalContainer.appendChild(petal);
 
 
+    /*
+    Animáció után eltávolítás
+    */
 
-    /* Animáció után eltávolítjuk */
+    window.setTimeout(
+        () => {
 
-    setTimeout(() => {
+            petal.remove();
 
-        petal.remove();
-
-    }, duration * 1000);
+        },
+        duration * 1000
+    );
 
 }
 
 
 
-/* Ritkán jelenjen meg új szirom */
+/* ================================================= */
+/* SZIRMOK IDŐZÍTÉSE                                 */
+/* ================================================= */
 
-setInterval(() => {
-
-    if (Math.random() > 0.65) {
-
-        createPetal();
-
-    }
-
-}, 1600);
-
-function stopMusic() {
-
-    if (!isPlaying) {
-        return;
-    }
-
-
-    music.pause();
-
-    isPlaying = false;
-
-
-    musicButton.classList.remove(
-        "playing"
-    );
-
-
-    audioControls.classList.remove(
-        "active"
-    );
-
-
-    musicButton.textContent = "♪";
-
-
-    const currentLanguage =
-        localStorage.getItem(
-            "weddingLanguage"
-        );
-
-
-    if (currentLanguage === "vi") {
-
-        musicButton.setAttribute(
-            "aria-label",
-            "Phát nhạc"
-        );
-
-    } else {
-
-        musicButton.setAttribute(
-            "aria-label",
-            "Zene lejátszása"
-        );
-
-    }
-
-}
-
-document.addEventListener(
-    "visibilitychange",
+window.setInterval(
     () => {
 
-        if (document.hidden) {
+        if (
+            reducedMotion.matches
+        ) {
 
-            stopMusic();
+            return;
 
         }
 
-    }
+
+        /*
+        Kb. 35% esély
+        minden 1,6 másodpercben.
+        */
+
+        if (
+            Math.random() > 0.65
+        ) {
+
+            createPetal();
+
+        }
+
+    },
+    1600
 );
 
-window.addEventListener(
-    "pagehide",
-    () => {
 
-        stopMusic();
 
-    }
-);
-
-// window.addEventListener(
-//     "blur",
-//     () => {
-
-//         stopMusic();
-
-//     }
-// );
-
-music.addEventListener(
-    "pause",
-    () => {
-
-        isPlaying = false;
-
-        musicButton.classList.remove(
-            "playing"
-        );
-
-        audioControls.classList.remove(
-            "active"
-        );
-
-        musicButton.textContent = "♪";
-
-    }
-);
-
-/* --------------------------------- */
-/* VARÁZSPÁLCA / CSILLÁM TRAIL       */
-/* --------------------------------- */
+/* ================================================= */
+/* VARÁZSPÁLCA / CSILLÁM TRAIL                       */
+/* ================================================= */
 
 const sparkleColors = [
 
-    "#f4d58d",   // világos arany
+    "#f4d58d",
     "#f4d58d",
 
-    "#e8c46a",   // arany
+    "#e8c46a",
     "#e8c46a",
 
-    "#fff7dc",   // törtfehér
+    "#fff7dc",
 
     "#ffffff",
     "#ffffff",
 
-    "#8a2942",   // burgundy
+    "#8a2942",
 
-    "#6f1d2e"    // sötét burgundy
+    "#6f1d2e"
+
 ];
 
 
 let lastSparkleTime = 0;
 
+let touchIsActive = false;
 
 
-function createSparkle(x, y) {
+
+/* ================================================= */
+/* CSILLÁM LÉTREHOZÁSA                               */
+/* ================================================= */
+
+function createSparkle(
+    x,
+    y
+) {
+
+    if (
+        reducedMotion.matches
+    ) {
+
+        return;
+
+    }
+
 
     const sparkle =
-        document.createElement("span");
+        document.createElement(
+            "span"
+        );
 
 
-    sparkle.classList.add("sparkle");
+    sparkle.classList.add(
+        "sparkle"
+    );
 
 
 
     /*
     Néha csillag alakú,
-    néha egyszerű fénypont
+    máskor egyszerű kis fénypont.
     */
 
-    if (Math.random() > 0.65) {
+    if (
+        Math.random() > 0.65
+    ) {
 
-        sparkle.classList.add("star");
+        sparkle.classList.add(
+            "star"
+        );
 
     }
 
 
 
-    /* Méret */
+    /*
+    Véletlenszerű méret
+    */
 
     const size =
-        3 + Math.random() * 6;
+        3
+        +
+        Math.random() * 6;
 
 
     sparkle.style.width =
         `${size}px`;
+
 
     sparkle.style.height =
         `${size}px`;
 
 
 
-    /* Kicsi random szórás az egér körül */
+    /*
+    Kicsi szórás a kurzor körül
+    */
 
     const randomX =
-        (Math.random() - 0.5) * 18;
+        (
+            Math.random()
+            -
+            0.5
+        )
+        *
+        18;
+
 
     const randomY =
-        (Math.random() - 0.5) * 18;
+        (
+            Math.random()
+            -
+            0.5
+        )
+        *
+        18;
 
 
     sparkle.style.left =
         `${x + randomX}px`;
+
 
     sparkle.style.top =
         `${y + randomY}px`;
 
 
 
-    /* Szín */
+    /*
+    Szín
+    */
 
     const sparkleColor =
         sparkleColors[
+
             Math.floor(
-                Math.random() *
+
+                Math.random()
+                *
                 sparkleColors.length
+
             )
+
         ];
 
 
     sparkle.style.backgroundColor =
         sparkleColor;
 
+
     sparkle.style.color =
         sparkleColor;
 
 
 
-    /* Fényudvar */
+    /*
+    Fényudvar
+    */
 
     sparkle.style.boxShadow =
-        `0 0 ${4 + Math.random() * 7}px currentColor`;
+        `0 0 ${
+            4
+            +
+            Math.random() * 7
+        }px currentColor`;
 
 
 
-    /* Véletlenszerű szétszóródás */
+    /*
+    Véletlenszerű szétszóródás
+    */
 
     sparkle.style.setProperty(
         "--move-x",
-        `${(Math.random() - 0.5) * 35}px`
+        `${
+            (
+                Math.random()
+                -
+                0.5
+            )
+            *
+            35
+        }px`
     );
 
 
     sparkle.style.setProperty(
         "--move-y",
-        `${10 + Math.random() * 30}px`
+        `${
+            10
+            +
+            Math.random() * 30
+        }px`
     );
 
 
@@ -696,9 +889,11 @@ function createSparkle(x, y) {
 
 
 
-    /* Animáció után töröljük */
+    /*
+    Animáció után eltávolítás
+    */
 
-    setTimeout(
+    window.setTimeout(
         () => {
 
             sparkle.remove();
@@ -711,28 +906,78 @@ function createSparkle(x, y) {
 
 
 
-/* --------------------------------- */
-/* EGÉR + TOUCH                      */
-/* --------------------------------- */
+/* ================================================= */
+/* TOUCH ÁLLAPOT                                     */
+/* ================================================= */
 
 window.addEventListener(
-
-    "pointermove",
-
+    "pointerdown",
     (event) => {
 
-        const now =
-            performance.now();
+        if (
+            event.pointerType === "touch"
+        ) {
+
+            touchIsActive = true;
+
+        }
+
+    },
+    {
+        passive: true
+    }
+);
 
 
-
-        /*
-        Mobilon csak valódi érintés közben.
-        */
+window.addEventListener(
+    "pointerup",
+    (event) => {
 
         if (
-            event.pointerType === "touch" &&
-            event.pressure === 0
+            event.pointerType === "touch"
+        ) {
+
+            touchIsActive = false;
+
+        }
+
+    },
+    {
+        passive: true
+    }
+);
+
+
+window.addEventListener(
+    "pointercancel",
+    (event) => {
+
+        if (
+            event.pointerType === "touch"
+        ) {
+
+            touchIsActive = false;
+
+        }
+
+    },
+    {
+        passive: true
+    }
+);
+
+
+
+/* ================================================= */
+/* EGÉR + ÉRINTÉS CSILLÁM                            */
+/* ================================================= */
+
+window.addEventListener(
+    "pointermove",
+    (event) => {
+
+        if (
+            reducedMotion.matches
         ) {
 
             return;
@@ -740,14 +985,39 @@ window.addEventListener(
         }
 
 
-
         /*
-        Csillám sűrűsége.
-        Nagyobb szám = ritkább.
+        Telefonon csak akkor legyen
+        csillám, ha az ujj ténylegesen
+        hozzáér a kijelzőhöz.
         */
 
         if (
-            now - lastSparkleTime < 45
+            event.pointerType === "touch"
+            &&
+            !touchIsActive
+        ) {
+
+            return;
+
+        }
+
+
+        const now =
+            performance.now();
+
+
+
+        /*
+        Sűrűség:
+        nagyobb szám = ritkább csillám.
+        */
+
+        if (
+            now
+            -
+            lastSparkleTime
+            <
+            45
         ) {
 
             return;
@@ -761,7 +1031,7 @@ window.addEventListener(
 
 
         /*
-        Minimum egy csillám.
+        Legalább egy csillám
         */
 
         createSparkle(
@@ -772,10 +1042,12 @@ window.addEventListener(
 
 
         /*
-        Néha egy második.
+        Néha egy második csillám
         */
 
-        if (Math.random() > 0.65) {
+        if (
+            Math.random() > 0.65
+        ) {
 
             createSparkle(
                 event.clientX,
@@ -785,9 +1057,15 @@ window.addEventListener(
         }
 
     },
-
     {
         passive: true
     }
-
 );
+
+
+
+/* ================================================= */
+/* KEZDETI AUDIO UI                                  */
+/* ================================================= */
+
+updateAudioUI();
