@@ -73,8 +73,6 @@ input {
 
     color: #999999;
 
-    font-family: "Inter", sans-serif;
-
     font-size: inherit;
 
     letter-spacing: inherit;
@@ -84,8 +82,8 @@ input {
     padding: 5px 2px;
 
     transition:
-        color 0.2s ease,
-        transform 0.2s ease;
+        color 0.25s ease,
+        transform 0.25s ease;
 }
 
 
@@ -121,28 +119,35 @@ input {
     width: 100%;
     max-width: 390px;
 
-    padding: 46px 34px;
+    padding:
+        46px
+        34px;
 
     text-align: center;
 
-    background: rgba(
-        255,
-        255,
-        255,
-        0.68
-    );
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            0.68
+        );
 
-    border: 1px solid rgba(
-        111,
-        29,
-        46,
-        0.10
-    );
+    border:
+        1px solid
+        rgba(
+            111,
+            29,
+            46,
+            0.10
+        );
 
     border-radius: 28px;
 
     box-shadow:
-        0 18px 60px
+        0
+        18px
+        60px
         rgba(
             40,
             20,
@@ -153,7 +158,9 @@ input {
     backdrop-filter: blur(8px);
 
     animation:
-        fadeIn 0.9s ease-out;
+        fadeIn
+        0.9s
+        ease-out;
 }
 
 
@@ -167,8 +174,6 @@ input {
         serif;
 
     font-size: 34px;
-
-    line-height: 1;
 }
 
 
@@ -182,8 +187,6 @@ input {
     font-weight: 400;
 
     font-size: 38px;
-
-    line-height: 1.1;
 }
 
 
@@ -191,7 +194,8 @@ input {
     max-width: 290px;
 
     margin:
-        0 auto
+        0
+        auto
         30px;
 
     color: #777777;
@@ -218,49 +222,43 @@ input {
         15px
         18px;
 
-    border: 1px solid rgba(
-        111,
-        29,
-        46,
-        0.22
-    );
+    border:
+        1px solid
+        rgba(
+            111,
+            29,
+            46,
+            0.22
+        );
 
     border-radius: 999px;
 
     outline: none;
 
-    background: rgba(
-        255,
-        255,
-        255,
-        0.82
-    );
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            0.82
+        );
 
     color: #111111;
 
     font-size: 14px;
 
     text-align: center;
-
-    transition:
-        border-color 0.2s ease,
-        box-shadow 0.2s ease,
-        background 0.2s ease;
-}
-
-
-.password-input::placeholder {
-    color: #aaaaaa;
 }
 
 
 .password-input:focus {
     border-color: #6f1d2e;
 
-    background: #ffffff;
-
     box-shadow:
-        0 0 0 3px
+        0
+        0
+        0
+        3px
         rgba(
             111,
             29,
@@ -292,27 +290,18 @@ input {
     text-transform: uppercase;
 
     cursor: pointer;
-
-    transition:
-        transform 0.2s ease,
-        background-color 0.2s ease,
-        box-shadow 0.2s ease;
 }
 
 
 .login-button:hover {
-    transform: translateY(-1px);
-
     background: #5f1828;
+}
 
-    box-shadow:
-        0 8px 24px
-        rgba(
-            111,
-            29,
-            46,
-            0.18
-        );
+
+.login-button:disabled {
+    opacity: 0.7;
+
+    cursor: default;
 }
 
 
@@ -327,62 +316,328 @@ input {
 
 
 /* ================================================= */
-/* FŐOLDAL                                           */
+/* ESKÜVŐI OLDAL                                     */
 /* ================================================= */
 
 .wedding-site {
+    position: relative;
+
+    width: 100%;
+
     min-height: 100svh;
+
+    overflow: hidden;
 }
 
 
-.hero {
+
+/* ================================================= */
+/* SLIDER                                            */
+/* ================================================= */
+
+.slider-shell {
+    position: relative;
+
+    width: 100%;
+
     min-height: 100svh;
 
     display: flex;
-    justify-content: center;
+
     align-items: center;
 
-    padding: 40px 20px;
+    justify-content: center;
+
+    overflow: hidden;
 }
 
 
-.card {
+.slides-viewport {
     width: 100%;
 
-    max-width: 650px;
+    overflow: hidden;
 
-    text-align: center;
+    touch-action: pan-y;
 
-    animation:
-        fadeIn 1.4s ease-out;
+    cursor: grab;
+
+    user-select: none;
 }
 
+
+.slides-viewport.dragging {
+    cursor: grabbing;
+}
+
+
+.slides-track {
+    display: flex;
+
+    width: 100%;
+
+    transform:
+        translate3d(
+            0,
+            0,
+            0
+        );
+
+    transition:
+        transform
+        850ms
+        cubic-bezier(
+            0.16,
+            1,
+            0.3,
+            1
+        );
+
+    will-change: transform;
+}
+
+
+.slides-track.dragging {
+    transition: none;
+}
+
+
+
+/* ================================================= */
+/* EGY DIA                                           */
+/* ================================================= */
+
+.wedding-slide {
+    position: relative;
+
+    flex:
+        0
+        0
+        100%;
+
+    width: 100%;
+
+    min-height: 100svh;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding:
+        55px
+        70px
+        95px;
+
+    overflow: hidden;
+}
+
+
+.slide-inner {
+    position: relative;
+
+    z-index: 2;
+
+    width: 100%;
+
+    max-width: 720px;
+
+    margin: 0 auto;
+
+    text-align: center;
+}
+
+
+
+/* ================================================= */
+/* SAJÁT SZIRMOK MINDEN DIÁN                        */
+/* ================================================= */
+
+.slide-petals {
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 4;
+
+    width: 100%;
+
+    height: 100%;
+
+    overflow: hidden;
+
+    pointer-events: none;
+
+    transform:
+        translate3d(
+            0,
+            0,
+            0
+        );
+
+    transition:
+        transform
+        750ms
+        cubic-bezier(
+            0.16,
+            1,
+            0.3,
+            1
+        );
+
+    will-change: transform;
+}
+
+
+.slide-petals.dragging {
+    transition: none;
+}
+
+
+.petal {
+    position: absolute;
+
+    top: -40px;
+
+    border-radius:
+        80%
+        20%
+        70%
+        30%;
+
+    opacity: 0;
+
+    filter:
+        blur(0.1px);
+
+    animation:
+        petalFall
+        linear
+        forwards;
+
+    will-change:
+        transform,
+        opacity;
+}
+
+
+@keyframes petalFall {
+
+    0% {
+        transform:
+            translate3d(
+                0,
+                -5vh,
+                0
+            )
+            rotate(
+                0deg
+            );
+
+        opacity: 0;
+    }
+
+
+    10% {
+        opacity: 0.62;
+    }
+
+
+    25% {
+        transform:
+            translate3d(
+                18px,
+                25vh,
+                0
+            )
+            rotate(
+                80deg
+            );
+    }
+
+
+    50% {
+        transform:
+            translate3d(
+                -14px,
+                52vh,
+                0
+            )
+            rotate(
+                175deg
+            );
+    }
+
+
+    75% {
+        transform:
+            translate3d(
+                20px,
+                78vh,
+                0
+            )
+            rotate(
+                270deg
+            );
+    }
+
+
+    100% {
+        transform:
+            translate3d(
+                -12px,
+                110vh,
+                0
+            )
+            rotate(
+                370deg
+            );
+
+        opacity: 0;
+    }
+
+}
+
+
+
+/* ================================================= */
+/* SAVE THE DATE                                     */
+/* ================================================= */
 
 .save-the-date {
     display: block;
 
     width: 100%;
+
     height: auto;
 
-    max-height: 75svh;
+    max-height: 73svh;
 
     object-fit: contain;
 
-    margin: 0 auto;
+    margin:
+        0
+        auto;
+
+    pointer-events: none;
+
+    user-select: none;
+
+    -webkit-user-drag: none;
 }
 
 
 .message {
-    margin-top: 28px;
+    margin-top: 22px;
 }
 
 
 .coming-soon {
     color: #666666;
 
-    font-size: 12px;
+    font-size: 11px;
 
-    letter-spacing: 1.5px;
+    letter-spacing: 1.4px;
 
     text-transform: uppercase;
 }
@@ -390,25 +645,357 @@ input {
 
 
 /* ================================================= */
-/* ANIMÁCIÓ                                          */
+/* HELYSZÍN DIA                                      */
 /* ================================================= */
 
-@keyframes fadeIn {
+.venue-slide {
+    max-width: 800px;
+}
 
-    from {
-        opacity: 0;
 
-        transform:
-            translateY(12px);
-    }
+.venue-eyebrow {
+    margin-bottom: 7px;
 
-    to {
-        opacity: 1;
+    color: #6f1d2e;
 
-        transform:
-            translateY(0);
-    }
+    font-size: 9px;
 
+    letter-spacing: 3px;
+
+    text-transform: uppercase;
+}
+
+
+.venue-title {
+    margin-bottom: 10px;
+
+    color: #211a1c;
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:
+        clamp(
+            34px,
+            5vw,
+            48px
+        );
+
+    font-weight: 400;
+
+    line-height: 1.05;
+}
+
+
+
+/* ================================================= */
+/* NAGY SZÍV TÉRKÉP                                  */
+/* ================================================= */
+
+.heart-map-wrapper {
+    width: 100%;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+}
+
+
+.heart-map-frame {
+    position: relative;
+
+    width:
+        min(
+            96%,
+            670px
+        );
+
+    aspect-ratio:
+        1.08 / 1;
+
+    overflow: hidden;
+
+    background: #d8d8d8;
+
+
+    -webkit-mask-image:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 90'%3E%3Cpath fill='black' d='M50 88C45 82 2 58 2 27C2 11 13 2 27 2C38 2 46 8 50 17C54 8 62 2 73 2C87 2 98 11 98 27C98 58 55 82 50 88Z'/%3E%3C/svg%3E");
+
+    -webkit-mask-repeat: no-repeat;
+
+    -webkit-mask-position: center;
+
+    -webkit-mask-size: contain;
+
+
+    mask-image:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 90'%3E%3Cpath fill='black' d='M50 88C45 82 2 58 2 27C2 11 13 2 27 2C38 2 46 8 50 17C54 8 62 2 73 2C87 2 98 11 98 27C98 58 55 82 50 88Z'/%3E%3C/svg%3E");
+
+    mask-repeat: no-repeat;
+
+    mask-position: center;
+
+    mask-size: contain;
+
+    filter:
+        drop-shadow(
+            0
+            20px
+            34px
+            rgba(
+                69,
+                26,
+                38,
+                0.14
+            )
+        );
+}
+
+
+.heart-map {
+    position: absolute;
+
+    width: 170%;
+
+    height: 170%;
+
+    left: -35%;
+
+    top: -35%;
+
+    border: 0;
+
+    display: block;
+
+    filter:
+        saturate(1.07)
+        contrast(1.03)
+        brightness(0.97);
+}
+
+
+.maps-link {
+    display: inline-block;
+
+    margin-top: 7px;
+
+    color: #6f1d2e;
+
+    font-size: 9px;
+
+    letter-spacing: 1.5px;
+
+    text-decoration: none;
+
+    text-transform: uppercase;
+
+    border-bottom:
+        1px solid
+        rgba(
+            111,
+            29,
+            46,
+            0.30
+        );
+
+    padding-bottom: 3px;
+}
+
+
+
+/* ================================================= */
+/* SLIDER NYILAK                                     */
+/* ================================================= */
+
+.slide-arrow {
+    position: absolute;
+
+    top: 50%;
+
+    z-index: 100;
+
+    width: 48px;
+
+    height: 48px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border:
+        1px solid
+        rgba(
+            111,
+            29,
+            46,
+            0.16
+        );
+
+    border-radius: 50%;
+
+    background:
+        rgba(
+            253,
+            252,
+            249,
+            0.78
+        );
+
+    color: #6f1d2e;
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size: 36px;
+
+    cursor: pointer;
+
+    transform:
+        translateY(-50%);
+
+    backdrop-filter: blur(8px);
+
+    opacity: 0.62;
+
+    transition:
+        opacity 0.25s ease,
+        background-color 0.25s ease,
+        color 0.25s ease;
+}
+
+
+.slide-arrow:hover {
+    opacity: 1;
+
+    background: #6f1d2e;
+
+    color: #ffffff;
+}
+
+
+.slide-arrow:disabled {
+    opacity: 0.16;
+
+    cursor: default;
+}
+
+
+.slide-arrow-left {
+    left: 22px;
+}
+
+
+.slide-arrow-right {
+    right: 22px;
+}
+
+
+
+/* ================================================= */
+/* SLIDER PONTOK                                     */
+/* ================================================= */
+
+.slide-dots {
+    position: absolute;
+
+    left: 50%;
+
+    bottom: 46px;
+
+    z-index: 200;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 10px;
+
+    transform:
+        translateX(-50%);
+}
+
+
+.slide-dot {
+    width: 6px;
+
+    height: 6px;
+
+    padding: 0;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background:
+        rgba(
+            111,
+            29,
+            46,
+            0.24
+        );
+
+    cursor: pointer;
+
+    transition:
+        width 0.35s ease,
+        border-radius 0.35s ease,
+        background-color 0.35s ease;
+}
+
+
+.slide-dot.active {
+    width: 24px;
+
+    border-radius: 999px;
+
+    background: #6f1d2e;
+}
+
+
+
+/* ================================================= */
+/* SWIPE SEGÉD                                       */
+/* ================================================= */
+
+.swipe-hint {
+    position: absolute;
+
+    left: 50%;
+
+    bottom: 20px;
+
+    z-index: 190;
+
+    transform:
+        translateX(-50%);
+
+    color: #aaaaaa;
+
+    font-size: 8px;
+
+    letter-spacing: 1.4px;
+
+    text-transform: uppercase;
+
+    white-space: nowrap;
+
+    transition:
+        opacity 0.4s ease;
+}
+
+
+.swipe-hint.hidden {
+    opacity: 0;
+
+    pointer-events: none;
 }
 
 
@@ -421,9 +1008,11 @@ input {
     position: fixed;
 
     right: 22px;
+
     bottom: 22px;
 
     display: flex;
+
     align-items: center;
 
     gap: 10px;
@@ -433,11 +1022,8 @@ input {
 
 
 .music-button {
-    position: relative;
-
-    flex-shrink: 0;
-
     width: 46px;
+
     height: 46px;
 
     border:
@@ -468,32 +1054,11 @@ input {
     font-size: 22px;
 
     cursor: pointer;
-
-    backdrop-filter: blur(8px);
-
-    box-shadow:
-        0 4px 18px
-        rgba(
-            0,
-            0,
-            0,
-            0.06
-        );
-
-    transition:
-        transform 0.25s ease,
-        background-color 0.25s ease,
-        color 0.25s ease;
-}
-
-
-.music-button:hover {
-    transform: scale(1.08);
 }
 
 
 .music-button.playing {
-    background-color: #6f1d2e;
+    background: #6f1d2e;
 
     color: #ffffff;
 }
@@ -508,8 +1073,6 @@ input {
 
     accent-color: #6f1d2e;
 
-    cursor: pointer;
-
     transition:
         width 0.3s ease,
         opacity 0.3s ease;
@@ -517,14 +1080,7 @@ input {
 
 
 .audio-controls:hover
-.volume-control {
-    width: 90px;
-
-    opacity: 1;
-
-    pointer-events: auto;
-}
-
+.volume-control,
 
 .audio-controls.active
 .volume-control {
@@ -545,6 +1101,7 @@ input {
     position: fixed;
 
     left: 22px;
+
     bottom: 22px;
 
     z-index: 1000;
@@ -562,126 +1119,6 @@ input {
     text-transform: uppercase;
 
     cursor: pointer;
-
-    transition:
-        color 0.2s ease;
-}
-
-
-.logout-button:hover {
-    color: #6f1d2e;
-}
-
-
-
-/* ================================================= */
-/* RÓZSASZIRMOK                                      */
-/* ================================================= */
-
-#petals {
-    position: fixed;
-
-    inset: 0;
-
-    width: 100%;
-    height: 100%;
-
-    pointer-events: none;
-
-    overflow: hidden;
-
-    z-index: 20;
-}
-
-
-.petal {
-    position: absolute;
-
-    top: -30px;
-
-    width: 11px;
-    height: 16px;
-
-    background-color: #6f1d2e;
-
-    border-radius:
-        80% 20%
-        70% 30%;
-
-    opacity: 0;
-
-    filter: blur(0.1px);
-
-    animation:
-        fall linear forwards;
-}
-
-
-@keyframes fall {
-
-    0% {
-        transform:
-            translate3d(
-                0,
-                -5vh,
-                0
-            )
-            rotate(0deg);
-
-        opacity: 0;
-    }
-
-
-    10% {
-        opacity: 0.65;
-    }
-
-
-    25% {
-        transform:
-            translate3d(
-                18px,
-                25vh,
-                0
-            )
-            rotate(90deg);
-    }
-
-
-    50% {
-        transform:
-            translate3d(
-                -12px,
-                50vh,
-                0
-            )
-            rotate(180deg);
-    }
-
-
-    75% {
-        transform:
-            translate3d(
-                22px,
-                75vh,
-                0
-            )
-            rotate(270deg);
-    }
-
-
-    100% {
-        transform:
-            translate3d(
-                -15px,
-                105vh,
-                0
-            )
-            rotate(360deg);
-
-        opacity: 0;
-    }
-
 }
 
 
@@ -694,6 +1131,7 @@ input {
     position: fixed;
 
     width: 6px;
+
     height: 6px;
 
     pointer-events: none;
@@ -701,12 +1139,6 @@ input {
     z-index: 9999;
 
     border-radius: 50%;
-
-    transform:
-        translate(
-            -50%,
-            -50%
-        );
 
     animation:
         sparkleFade
@@ -743,8 +1175,7 @@ input {
                 -50%,
                 -50%
             )
-            scale(1)
-            rotate(0deg);
+            scale(1);
     }
 
 
@@ -773,13 +1204,41 @@ input {
 
 
 /* ================================================= */
+/* FADE                                              */
+/* ================================================= */
+
+@keyframes fadeIn {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(12px);
+    }
+
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
+
+}
+
+
+
+/* ================================================= */
 /* MOBIL                                             */
 /* ================================================= */
 
-@media (max-width: 600px) {
+@media (
+    max-width: 700px
+) {
 
     .language-switcher {
         top: 14px;
+
         right: 16px;
 
         font-size: 10px;
@@ -794,13 +1253,9 @@ input {
 
 
     .login-box {
-        max-width: 360px;
-
         padding:
             40px
             24px;
-
-        border-radius: 24px;
     }
 
 
@@ -809,50 +1264,115 @@ input {
     }
 
 
-    .login-description {
-        font-size: 9px;
-
-        letter-spacing: 1px;
-    }
-
-
-    .hero {
+    .wedding-slide {
         padding:
-            20px
-            15px;
+            50px
+            5px
+            95px;
     }
 
 
-    .card {
-        max-width: 420px;
+    .slide-inner {
+        max-width: 490px;
     }
 
 
     .save-the-date {
-        max-height: 72svh;
+        max-height: 69svh;
     }
 
 
-    .message {
-        margin-top: 20px;
+    .venue-slide {
+        max-width: 500px;
     }
 
 
-    .coming-soon {
-        font-size: 10px;
+    .venue-eyebrow {
+        margin-bottom: 5px;
 
-        letter-spacing: 1.2px;
+        font-size: 8px;
+    }
+
+
+    .venue-title {
+        margin-bottom: 5px;
+
+        font-size: 30px;
+    }
+
+
+    .heart-map-frame {
+        width: 99%;
+    }
+
+
+    .heart-map {
+        width: 178%;
+
+        height: 178%;
+
+        left: -39%;
+
+        top: -39%;
+    }
+
+
+    .maps-link {
+        margin-top: 2px;
+
+        font-size: 8px;
+    }
+
+
+    .slide-arrow {
+        width: 36px;
+
+        height: 36px;
+
+        font-size: 27px;
+
+        opacity: 0.25;
+
+        background:
+            rgba(
+                253,
+                252,
+                249,
+                0.55
+            );
+    }
+
+
+    .slide-arrow-left {
+        left: 5px;
+    }
+
+
+    .slide-arrow-right {
+        right: 5px;
+    }
+
+
+    .slide-dots {
+        bottom: 43px;
+    }
+
+
+    .swipe-hint {
+        bottom: 20px;
     }
 
 
     .audio-controls {
         right: 16px;
+
         bottom: 16px;
     }
 
 
     .music-button {
         width: 42px;
+
         height: 42px;
 
         font-size: 20px;
@@ -867,6 +1387,7 @@ input {
 
     .logout-button {
         left: 16px;
+
         bottom: 19px;
     }
 
@@ -882,20 +1403,14 @@ input {
     prefers-reduced-motion: reduce
 ) {
 
-    .login-box,
-    .card {
-        animation: none;
-    }
-
-
     .petal {
         display: none;
     }
 
 
-    * {
-        scroll-behavior:
-            auto !important;
+    .slides-track,
+    .slide-petals {
+        transition: none !important;
     }
 
 }

@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 
 <html lang="hu">
@@ -52,14 +51,6 @@
 
 
 <body>
-
-
-    <!-- ======================================== -->
-    <!-- RÓZSASZIRMOK                             -->
-    <!-- ======================================== -->
-
-    <div id="petals"></div>
-
 
 
     <!-- ======================================== -->
@@ -173,36 +164,220 @@
     >
 
 
-        <main class="hero">
+        <!-- ==================================== -->
+        <!-- SLIDER                               -->
+        <!-- ==================================== -->
 
-            <div class="card">
+        <main class="slider-shell">
 
-                <img
-                    id="saveTheDateImage"
-                    src="images/save-the-date-hu.jpg"
-                    alt="Save the Date – 2027. május 21."
-                    class="save-the-date"
+
+            <!-- ================================= -->
+            <!-- SLIDER VIEWPORT                   -->
+            <!-- ================================= -->
+
+            <div
+                id="slidesViewport"
+                class="slides-viewport"
+            >
+
+                <div
+                    id="slidesTrack"
+                    class="slides-track"
                 >
 
 
-                <div class="message">
+                    <!-- ========================= -->
+                    <!-- 1. DIA – SAVE THE DATE   -->
+                    <!-- ========================= -->
 
-                    <p
-                        id="comingSoon"
-                        class="coming-soon"
+                    <section
+                        class="wedding-slide"
+                        data-slide="0"
                     >
-                        A részletekkel hamarosan jelentkezünk ♡
-                    </p>
+
+
+                        <!-- SAJÁT SZIRMOK -->
+
+                        <div
+                            class="slide-petals"
+                            aria-hidden="true"
+                        ></div>
+
+
+                        <div class="slide-inner">
+
+                            <img
+                                id="saveTheDateImage"
+                                src="images/save-the-date-hu.jpg"
+                                alt="Save the Date – 2027. május 21."
+                                class="save-the-date"
+                            >
+
+
+                            <div class="message">
+
+                                <p
+                                    id="comingSoon"
+                                    class="coming-soon"
+                                >
+                                    A részletekkel hamarosan jelentkezünk ♡
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </section>
+
+
+
+                    <!-- ========================= -->
+                    <!-- 2. DIA – HELYSZÍN        -->
+                    <!-- ========================= -->
+
+                    <section
+                        class="wedding-slide"
+                        data-slide="1"
+                    >
+
+
+                        <!-- SAJÁT SZIRMOK -->
+
+                        <div
+                            class="slide-petals"
+                            aria-hidden="true"
+                        ></div>
+
+
+                        <div class="slide-inner venue-slide">
+
+                            <p
+                                id="venueEyebrow"
+                                class="venue-eyebrow"
+                            >
+                                Helyszín
+                            </p>
+
+
+                            <h2
+                                id="venueTitle"
+                                class="venue-title"
+                            >
+                                Dudok Rendezvényház
+                            </h2>
+
+
+                            <div class="heart-map-wrapper">
+
+                                <div class="heart-map-frame">
+
+                                    <iframe
+                                        class="heart-map"
+                                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4458.905703339603!2d18.888397602025517!3d47.52326291756704!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x476a75be281f38b5%3A0x9fb181c254b618c2!2zRHVkb2sgUmVuZGV6dsOpbnlow6F6IMOpcyBWZW5kw6lnbMWR!5e1!3m2!1shu!2shu!4v1790111942663!5m2!1shu!2shu"
+                                        loading="lazy"
+                                        allowfullscreen
+                                        referrerpolicy="no-referrer-when-downgrade"
+                                        title="Esküvő helyszíne térképen"
+                                    ></iframe>
+
+                                </div>
+
+                            </div>
+
+
+                            <a
+                                id="mapsLink"
+                                class="maps-link"
+                                href="https://www.google.com/maps/search/?api=1&query=47.5243592%2C18.891523"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                Megnyitás Google Maps-ben
+                            </a>
+
+                        </div>
+
+                    </section>
+
 
                 </div>
 
             </div>
 
+
+
+            <!-- ================================= -->
+            <!-- SLIDER NYILAK                     -->
+            <!-- ================================= -->
+
+            <button
+                id="prevSlideButton"
+                class="slide-arrow slide-arrow-left"
+                type="button"
+                aria-label="Előző dia"
+            >
+                ‹
+            </button>
+
+
+            <button
+                id="nextSlideButton"
+                class="slide-arrow slide-arrow-right"
+                type="button"
+                aria-label="Következő dia"
+            >
+                ›
+            </button>
+
+
+
+            <!-- ================================= -->
+            <!-- SLIDER PONTOK                     -->
+            <!-- ================================= -->
+
+            <div
+                id="slideDots"
+                class="slide-dots"
+                aria-label="Diák"
+            >
+
+                <button
+                    class="slide-dot active"
+                    type="button"
+                    data-slide-target="0"
+                    aria-label="1. dia"
+                ></button>
+
+                <button
+                    class="slide-dot"
+                    type="button"
+                    data-slide-target="1"
+                    aria-label="2. dia"
+                ></button>
+
+            </div>
+
+
+
+            <!-- ================================= -->
+            <!-- SWIPE SEGÉD                       -->
+            <!-- ================================= -->
+
+            <p
+                id="swipeHint"
+                class="swipe-hint"
+            >
+                Húzd oldalra ♡
+            </p>
+
+
         </main>
 
 
 
-        <!-- ZENE -->
+        <!-- ======================================== -->
+        <!-- ZENE                                     -->
+        <!-- ======================================== -->
 
         <audio
             id="weddingMusic"
@@ -219,7 +394,9 @@
 
 
 
-        <!-- AUDIO VEZÉRLÉS -->
+        <!-- ======================================== -->
+        <!-- AUDIO VEZÉRLÉS                           -->
+        <!-- ======================================== -->
 
         <div
             id="audioControls"
@@ -250,7 +427,10 @@
         </div>
 
 
-        <!-- KILÉPÉS -->
+
+        <!-- ======================================== -->
+        <!-- KILÉPÉS                                  -->
+        <!-- ======================================== -->
 
         <button
             id="logoutButton"
