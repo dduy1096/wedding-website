@@ -523,3 +523,75 @@ body {
     }
 
 }
+
+/* --------------------------------- */
+/* VARÁZSPÁLCA / CSILLÁM TRAIL       */
+/* --------------------------------- */
+
+.sparkle {
+    position: fixed;
+
+    width: 6px;
+    height: 6px;
+
+    pointer-events: none;
+
+    z-index: 9999;
+
+    border-radius: 50%;
+
+    transform: translate(-50%, -50%);
+
+    animation:
+        sparkleFade
+        700ms
+        ease-out
+        forwards;
+}
+
+
+.sparkle.star {
+    border-radius: 0;
+
+    clip-path: polygon(
+        50% 0%,
+        61% 38%,
+        100% 50%,
+        61% 62%,
+        50% 100%,
+        39% 62%,
+        0% 50%,
+        39% 38%
+    );
+}
+
+
+@keyframes sparkleFade {
+
+    0% {
+
+        opacity: 1;
+
+        transform:
+            translate(-50%, -50%)
+            scale(1)
+            rotate(0deg);
+
+    }
+
+
+    100% {
+
+        opacity: 0;
+
+        transform:
+            translate(
+                calc(-50% + var(--move-x)),
+                calc(-50% + var(--move-y))
+            )
+            scale(0)
+            rotate(120deg);
+
+    }
+
+}
