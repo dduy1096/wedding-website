@@ -8,7 +8,7 @@
 
     <meta
         name="viewport"
-        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes"
     >
 
     <meta
@@ -181,6 +181,11 @@
                     class="slides-track"
                 >
 
+                    <div
+                        id="petalsTrack"
+                        class="petals-track-layer"
+                        aria-hidden="true"
+                    ></div>
 
                     <!-- ========================= -->
                     <!-- 1. DIA – SAVE THE DATE   -->
@@ -191,16 +196,12 @@
                         data-slide="0"
                     >
 
-                        <div
-                            class="slide-petals"
-                            aria-hidden="true"
-                        ></div>
-
 
                         <div class="slide-inner">
 
                             <img
                                 id="saveTheDateImage"
+                                draggable="false"
                                 src="images/save-the-date-hu.jpg"
                                 alt="Save the Date – 2027. május 21."
                                 class="save-the-date"
@@ -232,11 +233,6 @@
                         class="wedding-slide"
                         data-slide="1"
                     >
-
-                        <div
-                            class="slide-petals"
-                            aria-hidden="true"
-                        ></div>
 
 
                         <div class="slide-inner venue-slide">
@@ -302,21 +298,21 @@
 
             <button
                 id="prevSlideButton"
-                class="slide-arrow slide-arrow-left"
+                class="slide-arrow slide-arrow-up"
                 type="button"
                 aria-label="Előző dia"
             >
-                ‹
+                ↑
             </button>
 
 
             <button
                 id="nextSlideButton"
-                class="slide-arrow slide-arrow-right"
+                class="slide-arrow slide-arrow-down"
                 type="button"
                 aria-label="Következő dia"
             >
-                ›
+                ↓
             </button>
 
 
@@ -353,7 +349,7 @@
                 id="swipeHint"
                 class="swipe-hint"
             >
-                Húzd oldalra ♡
+                Húzd fel / le ♡
             </p>
 
 
@@ -395,7 +391,10 @@
                 type="button"
                 aria-label="Zene lejátszása"
             >
-                ♪
+                <span
+                    class="music-icon"
+                    aria-hidden="true"
+                ></span>
             </button>
 
 

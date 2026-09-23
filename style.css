@@ -408,9 +408,11 @@ input {
 .slides-viewport {
     width: 100%;
 
+    height: 100svh;
+
     overflow: hidden;
 
-    touch-action: pan-y;
+    touch-action: pan-x pinch-zoom;
 
     cursor: grab;
 
@@ -424,8 +426,10 @@ input {
 
 
 .slides-track {
+    position: relative;
     display: flex;
-
+    flex-direction: column;
+    height: 100svh;
     width: 100%;
 
     transform:
@@ -465,10 +469,10 @@ input {
     flex:
         0
         0
-        100%;
+        100svh;
 
     width: 100%;
-
+    height: 100svh;
     min-width: 0;
 
     min-height: 100svh;
@@ -510,18 +514,17 @@ input {
 /* SZIRMOK                                           */
 /* ================================================= */
 
-.slide-petals {
+.petals-track-layer {
     position: absolute;
 
-    inset: 0;
-
-    z-index: 4;
+    top: 0;
+    left: 0;
 
     width: 100%;
 
-    height: 100%;
+    z-index: 4;
 
-    overflow: hidden;
+    overflow: visible;
 
     pointer-events: none;
 
@@ -546,7 +549,7 @@ input {
 }
 
 
-.slide-petals.dragging {
+.petals-track-layer.dragging {
     transition: none;
 }
 
@@ -581,21 +584,21 @@ input {
 @keyframes petalFall {
 
     0% {
+        top: -40px;
+
         transform:
             translate3d(
                 0,
-                -5vh,
+                0,
                 0
             )
-            rotate(
-                0deg
-            );
+            rotate(0deg);
 
         opacity: 0;
     }
 
 
-    10% {
+    8% {
         opacity: 0.62;
     }
 
@@ -604,12 +607,10 @@ input {
         transform:
             translate3d(
                 18px,
-                25vh,
+                0,
                 0
             )
-            rotate(
-                80deg
-            );
+            rotate(90deg);
     }
 
 
@@ -617,12 +618,10 @@ input {
         transform:
             translate3d(
                 -14px,
-                52vh,
+                0,
                 0
             )
-            rotate(
-                175deg
-            );
+            rotate(180deg);
     }
 
 
@@ -630,25 +629,28 @@ input {
         transform:
             translate3d(
                 20px,
-                78vh,
+                0,
                 0
             )
-            rotate(
-                270deg
-            );
+            rotate(280deg);
     }
 
 
     100% {
+        top:
+            calc(
+                100%
+                +
+                50px
+            );
+
         transform:
             translate3d(
                 -12px,
-                110vh,
+                0,
                 0
             )
-            rotate(
-                370deg
-            );
+            rotate(380deg);
 
         opacity: 0;
     }
@@ -681,6 +683,10 @@ input {
     user-select: none;
 
     -webkit-user-drag: none;
+
+    touch-action: none;
+
+    mix-blend-mode: multiply;
 }
 
 
@@ -869,8 +875,6 @@ input {
 .slide-arrow {
     position: absolute;
 
-    top: 50%;
-
     z-index: 100;
 
     width: 48px;
@@ -912,9 +916,6 @@ input {
 
     cursor: pointer;
 
-    transform:
-        translateY(-50%);
-
     backdrop-filter:
         blur(8px);
 
@@ -929,12 +930,14 @@ input {
 }
 
 
-.slide-arrow-left {
-    left: 22px;
+.slide-arrow-up {
+    top: calc(50% - 58px);
+    right: 22px;
 }
 
 
-.slide-arrow-right {
+.slide-arrow-down {
+    top: calc(50% + 10px);
     right: 22px;
 }
 
@@ -947,21 +950,25 @@ input {
 .slide-dots {
     position: absolute;
 
-    left: 50%;
-
-    bottom:
+    left:
         calc(
-            46px
+            22px
             +
             env(
-                safe-area-inset-bottom,
+                safe-area-inset-left,
                 0px
             )
         );
 
+    top: 50%;
+
+    bottom: auto;
+
     z-index: 200;
 
     display: flex;
+
+    flex-direction: column;
 
     align-items: center;
 
@@ -970,7 +977,7 @@ input {
     gap: 10px;
 
     transform:
-        translateX(-50%);
+        translateY(-50%);
 }
 
 
@@ -996,14 +1003,16 @@ input {
     cursor: pointer;
 
     transition:
-        width 0.35s ease,
+        height 0.35s ease,
         border-radius 0.35s ease,
         background-color 0.35s ease;
 }
 
 
 .slide-dot.active {
-    width: 24px;
+    width: 6px;
+
+    height: 24px;
 
     border-radius: 999px;
 
@@ -1086,20 +1095,23 @@ input {
             )
         );
 
-    display: flex;
-
-    align-items: center;
-
-    gap: 10px;
+    width: 46px;
+    height: 150px;
 
     z-index: 1000;
 }
 
 
-.music-button {
-    width: 46px;
+.audio-controls::before {
+    content: "";
 
-    height: 46px;
+    position: absolute;
+
+    left: 50%;
+    bottom: 58px;
+
+    width: 34px;
+    height: 82px;
 
     border:
         1px solid
@@ -1107,7 +1119,88 @@ input {
             111,
             29,
             46,
-            0.28
+            0.12
+        );
+
+    border-radius: 999px;
+
+    background:
+        rgba(
+            253,
+            252,
+            249,
+            0.90
+        );
+
+    box-shadow:
+        0
+        7px
+        24px
+        rgba(
+            69,
+            16,
+            28,
+            0.08
+        );
+
+    backdrop-filter:
+        blur(12px);
+
+    -webkit-backdrop-filter:
+        blur(12px);
+
+    opacity: 0;
+
+    transform:
+        translateX(-50%)
+        translateY(8px);
+
+    pointer-events: none;
+
+    transition:
+        opacity 0.25s ease,
+        transform 0.35s
+        cubic-bezier(
+            0.16,
+            1,
+            0.3,
+            1
+        );
+}
+
+
+.audio-controls:hover::before,
+.audio-controls:focus-within::before {
+    opacity: 1;
+
+    transform:
+        translateX(-50%)
+        translateY(0);
+}
+
+
+.music-button {
+    position: absolute;
+
+    right: 0;
+    bottom: 0;
+
+    width: 48px;
+    height: 48px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+
+    border:
+        1px solid
+        rgba(
+            111,
+            29,
+            46,
+            0.22
         );
 
     border-radius: 50%;
@@ -1117,55 +1210,356 @@ input {
             253,
             252,
             249,
-            0.92
+            0.88
         );
 
     color: #6f1d2e;
 
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    font-size: 22px;
-
     cursor: pointer;
+
+    box-shadow:
+        0
+        6px
+        22px
+        rgba(
+            69,
+            16,
+            28,
+            0.10
+        );
+
+    backdrop-filter:
+        blur(12px);
+
+    -webkit-backdrop-filter:
+        blur(12px);
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        background-color 0.3s ease;
+}
+
+
+.music-button::after {
+    content: "";
+
+    position: absolute;
+
+    inset: -5px;
+
+    border:
+        1px solid
+        rgba(
+            111,
+            29,
+            46,
+            0.16
+        );
+
+    border-radius: 50%;
+
+    opacity: 0;
+
+    transform:
+        scale(0.88);
+
+    pointer-events: none;
+
+    transition:
+        opacity 0.3s ease,
+        transform 0.3s ease;
+}
+
+
+.music-button:hover {
+    transform:
+        scale(1.05);
+
+    box-shadow:
+        0
+        8px
+        26px
+        rgba(
+            69,
+            16,
+            28,
+            0.14
+        );
+}
+
+
+.music-button:hover::after {
+    opacity: 1;
+
+    transform:
+        scale(1);
 }
 
 
 .music-button.playing {
+    background:
+        rgba(
+            111,
+            29,
+            46,
+            0.07
+        );
+
+    box-shadow:
+        0
+        7px
+        24px
+        rgba(
+            111,
+            29,
+            46,
+            0.13
+        );
+}
+
+
+.music-button.playing::after {
+    opacity: 1;
+
+    animation:
+        musicPulse
+        2.4s
+        ease-in-out
+        infinite;
+}
+
+
+@keyframes musicPulse {
+
+    0%,
+    100% {
+        transform:
+            scale(0.95);
+
+        opacity: 0.18;
+    }
+
+
+    50% {
+        transform:
+            scale(1.12);
+
+        opacity: 0.55;
+    }
+
+}
+
+
+.music-icon {
+    position: relative;
+
+    z-index: 2;
+
+    display: block;
+
+    width: 15px;
+    height: 16px;
+}
+
+
+/* PLAY */
+
+.music-icon::before {
+    content: "";
+
+    position: absolute;
+
+    top: 2px;
+    left: 4px;
+
+    width: 0;
+    height: 0;
+
+    border-top:
+        6px solid transparent;
+
+    border-bottom:
+        6px solid transparent;
+
+    border-left:
+        9px solid #6f1d2e;
+
+    transition:
+        all 0.25s ease;
+}
+
+
+/* PLAY ÁLLAPOTBAN NINCS MÁSODIK ELEM */
+
+.music-icon::after {
+    content: "";
+
+    position: absolute;
+
+    opacity: 0;
+
+    transition:
+        all 0.25s ease;
+}
+
+
+/* PAUSE BAL */
+
+.music-button.playing
+.music-icon::before {
+    top: 2px;
+    left: 2px;
+
+    width: 3px;
+    height: 12px;
+
+    border: none;
+
+    border-radius: 2px;
+
+    background: #6f1d2e;
+}
+
+
+/* PAUSE JOBB */
+
+.music-button.playing
+.music-icon::after {
+    top: 2px;
+    right: 2px;
+
+    width: 3px;
+    height: 12px;
+
+    border-radius: 2px;
+
     background: #6f1d2e;
 
-    color: #ffffff;
+    opacity: 1;
 }
 
 
 .volume-control {
-    width: 0;
+    position: absolute;
+
+    z-index: 3;
+
+    left: 50%;
+    bottom: 92px;
+
+    width: 62px;
+    height: 4px;
+
+    margin: 0;
+
+    appearance: none;
+    -webkit-appearance: none;
+
+    background: transparent;
 
     opacity: 0;
 
     pointer-events: none;
 
-    accent-color: #6f1d2e;
+    transform:
+        translateX(-50%)
+        rotate(-90deg);
+
+    transform-origin: center;
 
     transition:
-        width 0.3s ease,
-        opacity 0.3s ease;
+        opacity 0.25s ease;
+}
+
+
+.volume-control::-webkit-slider-runnable-track {
+    height: 3px;
+
+    border-radius: 999px;
+
+    background:
+        rgba(
+            111,
+            29,
+            46,
+            0.20
+        );
+}
+
+
+.volume-control::-webkit-slider-thumb {
+    width: 11px;
+    height: 11px;
+
+    margin-top: -4px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: #6f1d2e;
+
+    box-shadow:
+        0
+        2px
+        5px
+        rgba(
+            111,
+            29,
+            46,
+            0.22
+        );
+
+    appearance: none;
+    -webkit-appearance: none;
+
+    cursor: pointer;
+}
+
+
+/* FIREFOX */
+
+.volume-control::-moz-range-track {
+    height: 3px;
+
+    border: none;
+
+    border-radius: 999px;
+
+    background:
+        rgba(
+            111,
+            29,
+            46,
+            0.20
+        );
+}
+
+
+.volume-control::-moz-range-thumb {
+    width: 11px;
+    height: 11px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: #6f1d2e;
+
+    cursor: pointer;
 }
 
 
 .audio-controls:hover
 .volume-control,
 
-.audio-controls.active
+.audio-controls:focus-within
 .volume-control {
-    width: 90px;
-
     opacity: 1;
 
     pointer-events: auto;
 }
-
 
 
 /* ================================================= */
@@ -1562,9 +1956,11 @@ input {
 
 
     .audio-controls {
+        position: fixed;
+
         right:
             calc(
-                14px
+                22px
                 +
                 env(
                     safe-area-inset-right,
@@ -1574,30 +1970,25 @@ input {
 
         bottom:
             calc(
-                14px
+                22px
                 +
                 env(
                     safe-area-inset-bottom,
                     0px
                 )
             );
+
+        width: 44px;
+        height: 140px;
+
+        z-index: 1000;
     }
 
 
     .music-button {
-        width: 40px;
-
-        height: 40px;
-
-        font-size: 20px;
+        width: 44px;
+        height: 44px;
     }
-
-
-    .audio-controls.active
-    .volume-control {
-        width: 70px;
-    }
-
 
     .logout-button {
         left:

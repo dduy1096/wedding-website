@@ -10,7 +10,13 @@ function initWeddingWebsite() {
     /* ============================================= */
 
     const WEDDING_PASSWORD =
-        "888";
+        String(
+            (13 * 13)
+            +
+            (31 * 23)
+            +
+            6
+        );
 
 
 
@@ -132,12 +138,17 @@ function initWeddingWebsite() {
             )
         );
 
-    const slidePetalContainers =
-        Array.from(
-            document.querySelectorAll(
-                ".slide-petals"
-            )
+    const petalsTrack =
+        document.getElementById(
+            "petalsTrack"
         );
+
+    if (petalsTrack) {
+
+        petalsTrack.style.height =
+            `${slides.length * 100}svh`;
+
+    }
 
     const prevSlideButton =
         document.getElementById(
@@ -208,13 +219,13 @@ function initWeddingWebsite() {
     let pointerDown =
         false;
 
-    let pointerStartX =
+    let pointerStartY =
         0;
 
-    let pointerCurrentX =
+    let pointerCurrentY =
         0;
 
-    let sliderWidth =
+    let sliderHeight =
         0;
 
     let lastSparkleTime =
@@ -223,6 +234,14 @@ function initWeddingWebsite() {
     let touchIsActive =
         false;
 
+    let wheelLocked =
+        false;
+
+    let wheelAccumulator =
+        0;
+
+    let wheelResetTimer =
+        null;
 
 
     /* ============================================= */
@@ -324,15 +343,15 @@ function initWeddingWebsite() {
     /* SLIDER                                        */
     /* ============================================= */
 
-    function updateSliderWidth() {
+    function updateSliderHeight() {
 
         if (!slidesViewport) {
             return;
         }
 
 
-        sliderWidth =
-            slidesViewport.clientWidth;
+        sliderHeight =
+            slidesViewport.clientHeight;
 
     }
 
@@ -340,49 +359,43 @@ function initWeddingWebsite() {
 
     function resetPetalParallax() {
 
-        slidePetalContainers.forEach(
-            (
-                container
-            ) => {
-
-                container.classList.remove(
-                    "dragging"
-                );
+        if (!petalsTrack) {
+            return;
+        }
 
 
-                container.style.transform =
-                    "translate3d(0, 0, 0)";
-
-            }
+        petalsTrack.classList.remove(
+            "dragging"
         );
+
+
+        petalsTrack.style.transform =
+            "translate3d(0, 0, 0)";
 
     }
 
 
 
     function applyPetalParallax(
-        deltaX
+        deltaY
     ) {
 
+        if (!petalsTrack) {
+            return;
+        }
+
+
         const parallaxAmount =
-            -deltaX * 0.12;
+            -deltaY * 0.12;
 
 
-        slidePetalContainers.forEach(
-            (
-                container
-            ) => {
-
-                container.classList.add(
-                    "dragging"
-                );
-
-
-                container.style.transform =
-                    `translate3d(${parallaxAmount}px, 0, 0)`;
-
-            }
+        petalsTrack.classList.add(
+            "dragging"
         );
+
+
+        petalsTrack.style.transform =
+            `translate3d(0, ${parallaxAmount}px, 0)`;
 
     }
 
@@ -418,7 +431,7 @@ function initWeddingWebsite() {
 
 
         slidesTrack.style.transform =
-            `translate3d(-${offset}%, 0, 0)`;
+            `translate3d(0, -${offset}%, 0)`;
 
 
         resetPetalParallax();
@@ -563,18 +576,6 @@ function initWeddingWebsite() {
             "playing",
             isPlaying
         );
-
-
-        audioControls.classList.toggle(
-            "active",
-            isPlaying
-        );
-
-
-        musicButton.textContent =
-            isPlaying
-                ? "♫"
-                : "♪";
 
 
         musicButton.setAttribute(
@@ -737,7 +738,7 @@ function initWeddingWebsite() {
         requestAnimationFrame(
             () => {
 
-                updateSliderWidth();
+                updateSliderHeight();
 
                 applySlidePosition(
                     true
@@ -833,7 +834,7 @@ function initWeddingWebsite() {
 
             if (swipeHint) {
                 swipeHint.textContent =
-                    "Vuốt sang ngang ♡";
+                    "Vuốt lên / xuống ♡";
             }
 
 
@@ -930,7 +931,7 @@ function initWeddingWebsite() {
 
             if (swipeHint) {
                 swipeHint.textContent =
-                    "Húzd oldalra ♡";
+                    "Húzd fel / le ♡";
             }
 
 
@@ -1169,7 +1170,7 @@ function initWeddingWebsite() {
 
                 if (
                     event.target.closest(
-                        "iframe"
+                        "iframe, a, button, input, select, textarea"
                     )
                 ) {
 
@@ -1182,15 +1183,15 @@ function initWeddingWebsite() {
                     true;
 
 
-                pointerStartX =
-                    event.clientX;
+                pointerStartY =
+                    event.clientY;
 
 
-                pointerCurrentX =
-                    event.clientX;
+                pointerCurrentY =
+                    event.clientY;
 
 
-                updateSliderWidth();
+                updateSliderHeight();
 
 
                 slidesViewport.classList.add(
@@ -1207,17 +1208,13 @@ function initWeddingWebsite() {
                 }
 
 
-                slidePetalContainers.forEach(
-                    (
-                        container
-                    ) => {
+                if (petalsTrack) {
 
-                        container.classList.add(
-                            "dragging"
-                        );
+                    petalsTrack.classList.add(
+                        "dragging"
+                    );
 
-                    }
-                );
+                }
 
 
                 slidesViewport.setPointerCapture(
@@ -1240,37 +1237,34 @@ function initWeddingWebsite() {
                 }
 
 
-                pointerCurrentX =
-                    event.clientX;
+                pointerCurrentY =
+                    event.clientY;
 
 
-                const deltaX =
-                    pointerCurrentX -
-                    pointerStartX;
+                const deltaY =
+                    pointerCurrentY -
+                    pointerStartY;
 
 
                 const baseOffset =
                     currentSlide *
-                    sliderWidth;
+                    sliderHeight;
 
 
                 let targetOffset =
                     baseOffset -
-                    deltaX;
+                    deltaY;
 
-
-
-                /* SZÉLSŐ GUMIHATÁS */
 
                 if (
                     currentSlide === 0
                     &&
-                    deltaX > 0
+                    deltaY > 0
                 ) {
 
                     targetOffset =
                         baseOffset -
-                        deltaX * 0.25;
+                        deltaY * 0.25;
 
                 }
 
@@ -1279,12 +1273,12 @@ function initWeddingWebsite() {
                     currentSlide ===
                     slides.length - 1
                     &&
-                    deltaX < 0
+                    deltaY < 0
                 ) {
 
                     targetOffset =
                         baseOffset -
-                        deltaX * 0.25;
+                        deltaY * 0.25;
 
                 }
 
@@ -1292,24 +1286,18 @@ function initWeddingWebsite() {
                 if (
                     slidesTrack
                     &&
-                    sliderWidth > 0
+                    sliderHeight > 0
                 ) {
 
                     slidesTrack.style.transform =
-                        `translate3d(-${targetOffset}px, 0, 0)`;
+                        `translate3d(0, -${targetOffset}px, 0)`;
 
                 }
 
 
-
-                /*
-                SZIRMOK KICSIT LEMARADNAK.
-                */
-
                 applyPetalParallax(
-                    deltaX
+                    deltaY
                 );
-
             }
         );
 
@@ -1340,27 +1328,27 @@ function initWeddingWebsite() {
             }
 
 
-            const deltaX =
-                pointerCurrentX -
-                pointerStartX;
+            const deltaY =
+                pointerCurrentY -
+                pointerStartY;
 
 
             const threshold =
                 Math.min(
                     110,
-                    sliderWidth * 0.16
+                    sliderHeight * 0.16
                 );
 
 
             if (
-                deltaX < -threshold
+                deltaY < -threshold
             ) {
 
                 nextSlide();
 
 
             } else if (
-                deltaX > threshold
+                deltaY > threshold
             ) {
 
                 previousSlide();
@@ -1393,7 +1381,177 @@ function initWeddingWebsite() {
 
     }
 
+    /* ============================================= */
+    /* EGÉRGÖRGŐ / TOUCHPAD                          */
+    /* ============================================= */
 
+    if (slidesViewport) {
+
+        slidesViewport.addEventListener(
+            "wheel",
+            (event) => {
+
+                /*
+                Ctrl + görgő / pinch zoom esetén
+                hagyjuk a böngészőt nagyítani.
+                */
+
+                if (
+                    event.ctrlKey
+                    ||
+                    event.metaKey
+                ) {
+                    return;
+                }
+
+
+                /*
+                Google Maps fölött a térkép
+                saját görgetése működjön.
+                */
+
+                if (
+                    event.target.closest(
+                        "iframe"
+                    )
+                ) {
+                    return;
+                }
+
+
+                /*
+                Ha inkább oldalirányú a mozdulat,
+                ne váltsunk diát.
+                */
+
+                if (
+                    Math.abs(event.deltaY)
+                    <=
+                    Math.abs(event.deltaX)
+                ) {
+                    return;
+                }
+
+
+                event.preventDefault();
+
+
+                /*
+                Trackpad sok apró wheel eseményt küld,
+                ezért összeadjuk őket.
+                */
+
+                wheelAccumulator +=
+                    event.deltaY;
+
+
+                clearTimeout(
+                    wheelResetTimer
+                );
+
+
+                wheelResetTimer =
+                    setTimeout(
+                        () => {
+
+                            wheelAccumulator =
+                                0;
+
+                        },
+                        160
+                    );
+
+
+                if (wheelLocked) {
+                    return;
+                }
+
+
+                const wheelThreshold =
+                    45;
+
+
+                /*
+                GÖRGETÉS LEFELÉ
+                */
+
+                if (
+                    wheelAccumulator >
+                    wheelThreshold
+                ) {
+
+                    if (
+                        currentSlide <
+                        slides.length - 1
+                    ) {
+
+                        nextSlide();
+
+                        wheelLocked =
+                            true;
+
+                    }
+
+
+                    wheelAccumulator =
+                        0;
+
+                }
+
+
+                /*
+                GÖRGETÉS FELFELÉ
+                */
+
+                else if (
+                    wheelAccumulator <
+                    -wheelThreshold
+                ) {
+
+                    if (
+                        currentSlide > 0
+                    ) {
+
+                        previousSlide();
+
+                        wheelLocked =
+                            true;
+
+                    }
+
+
+                    wheelAccumulator =
+                        0;
+
+                }
+
+
+                /*
+                Megvárjuk a slide animáció végét,
+                mielőtt új görgetést engedünk.
+                */
+
+                if (wheelLocked) {
+
+                    setTimeout(
+                        () => {
+
+                            wheelLocked =
+                                false;
+
+                        },
+                        850
+                    );
+
+                }
+
+            },
+            {
+                passive: false
+            }
+        );
+
+    }
 
     /* ============================================= */
     /* BILLENTYŰZET                                  */
@@ -1418,7 +1576,7 @@ function initWeddingWebsite() {
 
             if (
                 event.key ===
-                "ArrowRight"
+                "ArrowDown"
             ) {
 
                 nextSlide();
@@ -1428,7 +1586,7 @@ function initWeddingWebsite() {
 
             if (
                 event.key ===
-                "ArrowLeft"
+                "ArrowUp"
             ) {
 
                 previousSlide();
@@ -1448,7 +1606,7 @@ function initWeddingWebsite() {
         "resize",
         () => {
 
-            updateSliderWidth();
+            updateSliderHeight();
 
             applySlidePosition(
                 false
@@ -1745,11 +1903,15 @@ function initWeddingWebsite() {
 
 
         const duration =
-            8
-            +
-            Math.random()
+            (
+                8
+                +
+                Math.random()
+                *
+                6
+            )
             *
-            6;
+            slides.length;
 
 
         petal.style.animationDuration =
@@ -1808,47 +1970,22 @@ function initWeddingWebsite() {
 
 
 
-    function createPetalsForNearbySlides() {
+    setInterval(
+        () => {
 
-        slidePetalContainers.forEach(
-            (
-                container,
-                index
-            ) => {
+            if (
+                petalsTrack
+                &&
+                Math.random() > 0.60
+            ) {
 
-                /*
-                Csak az aktuális és a közvetlen
-                szomszédos diákon generálunk.
-                */
-
-                const distance =
-                    Math.abs(
-                        index -
-                        currentSlide
-                    );
-
-
-                if (
-                    distance <= 1
-                    &&
-                    Math.random() > 0.60
-                ) {
-
-                    createPetal(
-                        container
-                    );
-
-                }
+                createPetal(
+                    petalsTrack
+                );
 
             }
-        );
 
-    }
-
-
-
-    setInterval(
-        createPetalsForNearbySlides,
+        },
         1350
     );
 
@@ -1859,32 +1996,28 @@ function initWeddingWebsite() {
     ne kelljen várni az elsőre.
     */
 
-    slidePetalContainers.forEach(
-        (
-            container
-        ) => {
+    if (petalsTrack) {
 
-            for (
-                let i = 0;
-                i < 3;
-                i++
-            ) {
+        for (
+            let i = 0;
+            i < 5;
+            i++
+        ) {
 
-                setTimeout(
-                    () => {
+            setTimeout(
+                () => {
 
-                        createPetal(
-                            container
-                        );
+                    createPetal(
+                        petalsTrack
+                    );
 
-                    },
-                    i * 450
-                );
-
-            }
+                },
+                i * 400
+            );
 
         }
-    );
+
+    }
 
 
 
@@ -2192,7 +2325,7 @@ function initWeddingWebsite() {
     /* INICIALIZÁLÁS                                 */
     /* ============================================= */
 
-    updateSliderWidth();
+    updateSliderHeight();
 
 
     goToSlide(
