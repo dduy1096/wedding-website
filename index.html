@@ -1,438 +1,143 @@
 <!DOCTYPE html>
-
 <html lang="hu">
-
 <head>
-
     <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes"
-    >
-
-    <meta
-        name="robots"
-        content="noindex, nofollow"
-    >
-
-    <meta
-        name="description"
-        content="Esküvő – 2027. május 21."
-    >
-
-    <title>
-        Esküvő – 2027.05.21.
-    </title>
-
-
-    <link
-        rel="preconnect"
-        href="https://fonts.googleapis.com"
-    >
-
-    <link
-        rel="preconnect"
-        href="https://fonts.gstatic.com"
-        crossorigin
-    >
-
-    <link
-        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Inter:wght@300;400&display=swap"
-        rel="stylesheet"
-    >
-
-    <link
-        rel="stylesheet"
-        href="style.css"
-    >
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes" >
+    <meta name="robots" content="noindex, nofollow" >
+    <meta name="description" content="Esküvő – 2027. május 21." >
+    <title>Esküvő – 2027.05.21.</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" >
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin >
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Inter:wght@300;400&display=swap" rel="stylesheet" >
+    <link rel="stylesheet" href="style.css" >
 </head>
-
-
 <body>
-
-
     <!-- ======================================== -->
     <!-- NYELVVÁLTÓ                               -->
     <!-- ======================================== -->
-
     <div class="language-switcher">
-
-        <button
-            id="huButton"
-            class="lang-button active"
-            type="button"
-        >
-            HU
-        </button>
-
+        <button id="huButton" class="lang-button active" type="button" >HU</button>
         <span>|</span>
-
-        <button
-            id="viButton"
-            class="lang-button"
-            type="button"
-        >
-            VI
-        </button>
-
+        <button id="viButton" class="lang-button" type="button" >VI</button>
     </div>
-
-
-
     <!-- ======================================== -->
     <!-- LOGIN                                    -->
     <!-- ======================================== -->
-
-    <section
-        id="loginScreen"
-        class="login-screen"
-    >
-
+    <section id="loginScreen" class="login-screen" >
         <main class="login-box">
-
-            <div class="heart">
-                ♡
-            </div>
-
-            <h1 id="loginTitle">
-                Üdvözlünk
-            </h1>
-
-            <p
-                id="loginDescription"
-                class="login-description"
-            >
-                Kérjük, add meg a meghívóban található jelszót
-            </p>
-
-
-            <form
-                id="loginForm"
-                autocomplete="off"
-            >
-
+            <div class="heart">♡</div>
+            <h1 id="loginTitle">Üdvözlünk</h1>
+            <p id="loginDescription" class="login-description" >Kérjük, add meg a meghívóban található jelszót</p>
+            <form id="loginForm" autocomplete="off" >
                 <div class="password-wrapper">
-
-                    <input
-                        id="passwordInput"
-                        class="password-input"
-                        type="password"
-                        placeholder="Jelszó"
-                        required
-                        autofocus
-                        autocomplete="current-password"
-                    >
-
+                    <input id="passwordInput" class="password-input" type="password" placeholder="Jelszó" required autofocus autocomplete="current-password" >
                 </div>
-
-
-                <button
-                    id="loginButton"
-                    class="login-button"
-                    type="submit"
-                >
-                    Belépés
-                </button>
-
+                <button id="loginButton" class="login-button" type="submit" >Belépés</button>
             </form>
-
-
-            <p
-                id="loginError"
-                class="login-error"
-                hidden
-            >
-                Hibás jelszó ♡
-            </p>
-
+            <p id="loginError" class="login-error" hidden >Hibás jelszó ♡</p>
         </main>
-
     </section>
-
-
-
     <!-- ======================================== -->
     <!-- ESKÜVŐI OLDAL                            -->
     <!-- ======================================== -->
-
-    <div
-        id="weddingSite"
-        class="wedding-site"
-        hidden
-    >
-
-
+    <div id="weddingSite" class="wedding-site" hidden >
         <!-- ==================================== -->
         <!-- SLIDER                               -->
         <!-- ==================================== -->
-
         <main class="slider-shell">
-
-
-            <div
-                id="slidesViewport"
-                class="slides-viewport"
-            >
-
-                <div
-                    id="slidesTrack"
-                    class="slides-track"
-                >
-
-                    <div
-                        id="petalsTrack"
-                        class="petals-track-layer"
-                        aria-hidden="true"
-                    ></div>
-
+            <div id="slidesViewport" class="slides-viewport" >
+                <div id="slidesTrack" class="slides-track" >
+                    <div id="petalsTrack" class="petals-track-layer" aria-hidden="true" ></div>
                     <!-- ========================= -->
                     <!-- 1. DIA – SAVE THE DATE   -->
                     <!-- ========================= -->
-
-                    <section
-                        class="wedding-slide"
-                        data-slide="0"
-                    >
-
-
+                    <section class="wedding-slide" data-slide="0" >
                         <div class="slide-inner">
-
-                            <img
-                                id="saveTheDateImage"
-                                draggable="false"
-                                src="images/save-the-date-hu.jpg"
-                                alt="Save the Date – 2027. május 21."
-                                class="save-the-date"
-                            >
-
-
+                            <img id="saveTheDateImage" draggable="false" src="images/save-the-date-hu.jpg" alt="Save the Date – 2027. május 21." class="save-the-date" >
                             <div class="message">
-
-                                <p
-                                    id="comingSoon"
-                                    class="coming-soon"
-                                >
-                                    A részletekkel hamarosan jelentkezünk ♡
-                                </p>
-
+                                <p id="comingSoon" class="coming-soon" >A részletekkel hamarosan jelentkezünk ♡</p>
                             </div>
-
                         </div>
-
                     </section>
-
-
-
                     <!-- ========================= -->
                     <!-- 2. DIA – HELYSZÍN        -->
                     <!-- ========================= -->
-
-                    <section
-                        class="wedding-slide"
-                        data-slide="1"
-                    >
-
-
+                    <section class="wedding-slide" data-slide="1" >
                         <div class="slide-inner venue-slide">
-
-                            <p
-                                id="venueEyebrow"
-                                class="venue-eyebrow"
-                            >
-                                Helyszín
-                            </p>
-
-
-                            <h2
-                                id="venueTitle"
-                                class="venue-title"
-                            >
-                                Dudok Rendezvényház
-                            </h2>
-
-
+                            <p id="venueEyebrow" class="venue-eyebrow" >Helyszín</p>
+                            <h2 id="venueTitle" class="venue-title" >Dudok Rendezvényház</h2>
                             <div class="heart-map-wrapper">
-
                                 <div class="heart-map-frame">
-
-                                    <iframe
-                                        class="heart-map"
-                                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4458.905703339603!2d18.888397602025517!3d47.52326291756704!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x476a75be281f38b5%3A0x9fb181c254b618c2!2zRHVkb2sgUmVuZGV6dsOpbnlow6F6IMOpcyBWZW5kw6lnbMWR!5e1!3m2!1shu!2shu!4v1790111942663!5m2!1shu!2shu"
-                                        loading="lazy"
-                                        allowfullscreen
-                                        referrerpolicy="strict-origin-when-cross-origin"
-                                        title="Esküvő helyszíne térképen"
-                                    ></iframe>
-
+                                    <iframe class="heart-map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4458.905703339603!2d18.888397602025517!3d47.52326291756704!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x476a75be281f38b5%3A0x9fb181c254b618c2!2zRHVkb2sgUmVuZGV6dsOpbnlow6F6IMOpcyBWZW5kw6lnbMWR!5e1!3m2!1shu!2shu!4v1790111942663!5m2!1shu!2shu" loading="lazy" allowfullscreen referrerpolicy="strict-origin-when-cross-origin" title="Esküvő helyszíne térképen" ></iframe>
                                 </div>
-
                             </div>
-
-
-                            <a
-                                id="mapsLink"
-                                class="maps-link"
-                                href="https://www.google.com/maps/search/?api=1&query=Dudok%20Rendezv%C3%A9nyh%C3%A1z%20%C3%A9s%20Vend%C3%A9gl%C5%91"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
-                                Megnyitás Google Maps-ben
-                            </a>
-
+                            <a id="mapsLink" class="maps-link" href="https://www.google.com/maps/search/?api=1&query=Dudok%20Rendezv%C3%A9nyh%C3%A1z%20%C3%A9s%20Vend%C3%A9gl%C5%91" target="_blank" rel="noopener noreferrer" >Megnyitás Google Maps-ben</a>
+                            <div id="countdown" class="countdown">
+                                <div class="countdown-item">
+                                    <span id="countdownDays" class="countdown-number">000</span>
+                                    <span id="countdownDaysLabel" class="countdown-label">nap</span>
+                                </div>
+                                <div class="countdown-separator">·</div>
+                                <div class="countdown-item">
+                                    <span id="countdownHours" class="countdown-number">00</span>
+                                    <span id="countdownHoursLabel" class="countdown-label">óra</span>
+                                </div>
+                                <div class="countdown-separator">·</div>
+                                <div class="countdown-item">
+                                    <span id="countdownMinutes" class="countdown-number">00</span>
+                                    <span id="countdownMinutesLabel" class="countdown-label">perc</span>
+                                </div>
+                                <div class="countdown-separator">·</div>
+                                <div class="countdown-item">
+                                    <span id="countdownSeconds" class="countdown-number">00</span>
+                                    <span id="countdownSecondsLabel" class="countdown-label">mp</span>
+                                </div>
+                            </div>
                         </div>
-
                     </section>
-
-
                 </div>
-
             </div>
-
-
-
             <!-- ================================= -->
             <!-- SLIDER NYILAK                     -->
             <!-- ================================= -->
-
-            <button
-                id="prevSlideButton"
-                class="slide-arrow slide-arrow-up"
-                type="button"
-                aria-label="Előző dia"
-            >
-                ↑
-            </button>
-
-
-            <button
-                id="nextSlideButton"
-                class="slide-arrow slide-arrow-down"
-                type="button"
-                aria-label="Következő dia"
-            >
-                ↓
-            </button>
-
-
-
+            <button id="prevSlideButton" class="slide-arrow slide-arrow-up" type="button" aria-label="Előző dia" >↑</button>
+            <button id="nextSlideButton" class="slide-arrow slide-arrow-down" type="button" aria-label="Következő dia" >↓</button>
             <!-- ================================= -->
             <!-- SLIDER PONTOK                     -->
             <!-- ================================= -->
-
-            <div
-                id="slideDots"
-                class="slide-dots"
-                aria-label="Diák"
-            >
-
-                <button
-                    class="slide-dot active"
-                    type="button"
-                    data-slide-target="0"
-                    aria-label="1. dia"
-                ></button>
-
-                <button
-                    class="slide-dot"
-                    type="button"
-                    data-slide-target="1"
-                    aria-label="2. dia"
-                ></button>
-
+            <div id="slideDots" class="slide-dots" aria-label="Diák" >
+                <button class="slide-dot active" type="button" data-slide-target="0" aria-label="1. dia" ></button>
+                <button class="slide-dot" type="button" data-slide-target="1" aria-label="2. dia" ></button>
             </div>
-
-
-
-            <p
-                id="swipeHint"
-                class="swipe-hint"
-            >
-                Húzd fel / le ♡
-            </p>
-
-
+            <p id="swipeHint" class="swipe-hint" >Húzd fel / le ♡</p>
         </main>
-
-
-
         <!-- ======================================== -->
         <!-- ZENE                                     -->
         <!-- ======================================== -->
-
-        <audio
-            id="weddingMusic"
-            loop
-            preload="metadata"
-        >
-
-            <source
-                src="music/wedding-music.wav"
-                type="audio/wav"
-            >
-
+        <audio id="weddingMusic" loop preload="metadata" >
+            <source src="music/wedding-music.wav" type="audio/wav" >
         </audio>
-
-
-
         <!-- ======================================== -->
         <!-- AUDIO VEZÉRLÉS                           -->
         <!-- ======================================== -->
-
-        <div
-            id="audioControls"
-            class="audio-controls"
-        >
-
-            <button
-                id="musicButton"
-                class="music-button"
-                type="button"
-                aria-label="Zene lejátszása"
-            >
-                <span
-                    class="music-icon"
-                    aria-hidden="true"
-                ></span>
+        <div id="audioControls" class="audio-controls" >
+            <button id="musicButton" class="music-button" type="button" aria-label="Zene lejátszása" >
+                <span class="music-icon" aria-hidden="true" ></span>
             </button>
-
-
-            <input
-                id="volumeControl"
-                class="volume-control"
-                type="range"
-                min="0"
-                max="1"
-                step="0.05"
-                value="0.35"
-                aria-label="Hangerő"
-            >
-
+            <input id="volumeControl" class="volume-control" type="range" min="0" max="1" step="0.05" value="0.35" aria-label="Hangerő" >
         </div>
-
-
-
         <!-- ======================================== -->
         <!-- KILÉPÉS                                  -->
         <!-- ======================================== -->
-
-        <button
-            id="logoutButton"
-            class="logout-button"
-            type="button"
-        >
-            Kilépés
-        </button>
-
-
+        <button id="logoutButton" class="logout-button" type="button" >Kilépés</button>
     </div>
-
-
-
     <script src="script.js"></script>
-
-
 </body>
-
+<svg width="0" height="0" aria-hidden="true" focusable="false" >
+    <defs>
+        <clipPath id="heartClip" clipPathUnits="objectBoundingBox" >
+            <path d=" M 0.5 0.98 C 0.44 0.91, 0.03 0.66, 0.03 0.31 C 0.03 0.12, 0.16 0.03, 0.30 0.03 C 0.40 0.03, 0.47 0.10, 0.50 0.20 C 0.53 0.10, 0.60 0.03, 0.70 0.03 C 0.84 0.03, 0.97 0.12, 0.97 0.31 C 0.97 0.66, 0.56 0.91, 0.50 0.98 Z " />
+        </clipPath>
+    </defs>
+</svg>
 </html>
