@@ -689,8 +689,9 @@ button, input {
 /* ================================================= */
 .logout-button {
     position: fixed;
-    left: calc( 22px + env( safe-area-inset-left, 0px ) );
-    bottom: calc( 22px + env( safe-area-inset-bottom, 0px ) );
+    left: calc(22px + env(safe-area-inset-left, 0px));
+    top: calc(22px + env(safe-area-inset-top, 0px));
+    bottom: auto;
     z-index: 1000;
     border: none;
     background: transparent;
@@ -823,20 +824,49 @@ button, input {
         bottom: calc( 23px + env( safe-area-inset-bottom, 0px ) );
     }
     .audio-controls {
-        position: fixed;
-        right: calc(18px + env(safe-area-inset-right, 0px));
+        left: calc(14px + env(safe-area-inset-left, 0px));
+        right: auto;
         bottom: calc(18px + env(safe-area-inset-bottom, 0px));
-        width: 44px;
-        height: 108px;
-        z-index: 1000;
+        width: auto;
+        height: 44px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+    .audio-controls::before {
+        display: none;
     }
     .music-button {
+        position: relative;
+        right: auto;
+        bottom: auto;
+        flex: 0 0 44px;
         width: 44px;
         height: 44px;
+        transform: none;
+    }
+    .music-button::after {
+        display: none;
+    }
+    .music-button.playing::after {
+        display: none;
+    }
+    .volume-control {
+        position: relative;
+        left: auto;
+        right: auto;
+        bottom: auto;
+        width: 110px;
+        height: 28px;
+        opacity: 1;
+        pointer-events: auto;
+        transform: none;
+        touch-action: manipulation;
     }
     .logout-button {
-        left: calc( 14px + env( safe-area-inset-left, 0px ) );
-        bottom: calc( 18px + env( safe-area-inset-bottom, 0px ) );
+        left: calc(14px + env(safe-area-inset-left, 0px));
+        top: calc(14px + env(safe-area-inset-top, 0px));
+        bottom: auto;
         font-size: 9px;
     }
     .countdown {
@@ -855,26 +885,11 @@ button, input {
     .countdown-separator {
         font-size: 19px;
     }
-    .audio-controls::before {
-        left: auto;
-        right: -2px;
-        bottom: 58px;
-        width: 122px;
-        height: 34px;
-        border-radius: 999px;
-        opacity: 1;
-        transform: none;
-        pointer-events: none;
-    }
-    .volume-control {
-        left: auto;
-        right: 11px;
-        bottom: 73px;
-        width: 98px;
-        height: 4px;
-        opacity: 1;
-        pointer-events: auto;
-        transform: none;
+    .music-button,
+    .volume-control,
+    .logout-button {
+        -webkit-tap-highlight-color: transparent;
+        touch-action: manipulation;
     }
 }
 /* ================================================= */
