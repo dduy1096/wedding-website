@@ -320,6 +320,7 @@ button, input {
 /* SZÍV TÉRKÉP                                       */
 /* ================================================= */
 .heart-map-wrapper {
+    position: relative;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -335,6 +336,22 @@ button, input {
     clip-path: url(#heartClip);
     -webkit-clip-path: url(#heartClip);
     filter: drop-shadow( 0 20px 34px rgba( 69, 26, 38, 0.14 ) );
+}
+.heart-touch-shield {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: min(96%, 670px);
+    aspect-ratio: 1.08 / 1;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    overflow: visible;
+    pointer-events: none;
+}
+.heart-touch-shield-path {
+    fill: rgba(255, 255, 255, 0.001);
+    pointer-events: fill;
+    touch-action: pan-x pinch-zoom;
 }
 .heart-map {
     position: absolute;
@@ -807,10 +824,10 @@ button, input {
     }
     .audio-controls {
         position: fixed;
-        right: calc( 22px + env( safe-area-inset-right, 0px ) );
-        bottom: calc( 22px + env( safe-area-inset-bottom, 0px ) );
+        right: calc(18px + env(safe-area-inset-right, 0px));
+        bottom: calc(18px + env(safe-area-inset-bottom, 0px));
         width: 44px;
-        height: 140px;
+        height: 108px;
         z-index: 1000;
     }
     .music-button {
@@ -837,6 +854,27 @@ button, input {
     }
     .countdown-separator {
         font-size: 19px;
+    }
+    .audio-controls::before {
+        left: auto;
+        right: -2px;
+        bottom: 58px;
+        width: 122px;
+        height: 34px;
+        border-radius: 999px;
+        opacity: 1;
+        transform: none;
+        pointer-events: none;
+    }
+    .volume-control {
+        left: auto;
+        right: 11px;
+        bottom: 73px;
+        width: 98px;
+        height: 4px;
+        opacity: 1;
+        pointer-events: auto;
+        transform: none;
     }
 }
 /* ================================================= */
