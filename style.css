@@ -504,8 +504,9 @@ button, input {
 /* ================================================= */
 .audio-controls {
     position: fixed;
-    right: calc( 22px + env( safe-area-inset-right, 0px ) );
-    bottom: calc( 22px + env( safe-area-inset-bottom, 0px ) );
+    left: calc(22px + env(safe-area-inset-left, 0px));
+    right: auto;
+    bottom: calc(22px + env(safe-area-inset-bottom, 0px));
     width: 46px;
     height: 150px;
     z-index: 1000;
