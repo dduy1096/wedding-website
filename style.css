@@ -827,11 +827,8 @@ button, input {
         left: calc(14px + env(safe-area-inset-left, 0px));
         right: auto;
         bottom: calc(18px + env(safe-area-inset-bottom, 0px));
-        width: auto;
+        width: 44px;
         height: 44px;
-        display: flex;
-        align-items: center;
-        gap: 12px;
     }
     .audio-controls::before {
         display: none;
@@ -852,16 +849,7 @@ button, input {
         display: none;
     }
     .volume-control {
-        position: relative;
-        left: auto;
-        right: auto;
-        bottom: auto;
-        width: 110px;
-        height: 28px;
-        opacity: 1;
-        pointer-events: auto;
-        transform: none;
-        touch-action: manipulation;
+        display: none;
     }
     .logout-button {
         left: calc(14px + env(safe-area-inset-left, 0px));
