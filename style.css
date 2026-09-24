@@ -437,12 +437,15 @@ button, input {
     cursor: default;
 }
 .slide-arrow-up {
-    top: calc(50% - 58px);
-    right: 22px;
+    top: auto;
+    right: calc(14px + env(safe-area-inset-right, 0px));
+    bottom: calc(72px + env(safe-area-inset-bottom, 0px));
 }
+
 .slide-arrow-down {
-    top: calc(50% + 10px);
-    right: 22px;
+    top: auto;
+    right: calc(14px + env(safe-area-inset-right, 0px));
+    bottom: calc(22px + env(safe-area-inset-bottom, 0px));
 }
 /* ================================================= */
 /* SLIDER PONTOK                                     */
@@ -805,11 +808,11 @@ button, input {
         font-size: 8px;
     }
     .slide-arrow {
-        width: 34px;
-        height: 34px;
+        width: 40px;
+        height: 40px;
         font-size: 26px;
-        opacity: 0.25;
-        background: rgba( 253, 252, 249, 0.60 );
+        opacity: 0.55;
+        background: rgba(253, 252, 249, 0.86);
     }
     .slide-arrow-left {
         left: calc( 4px + env( safe-area-inset-left, 0px ) );
